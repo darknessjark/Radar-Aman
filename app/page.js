@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import TopBar from "./components/TopBar";
 import ResultView from "./components/ResultView";
 import useCopy from "./components/useCopy";
@@ -9,6 +9,17 @@ import { reportText } from "@/lib/report";
 import { PLATFORMS, platId } from "@/lib/i18n";
 
 const MSG = ["whatsapp", "sms"], WEB = ["web", "gads"];
+const platFromUrl = u => {
+  const d = String(u || "").toLowerCase();
+  if (/tiktok\.com/.test(d)) return "تيك توك";
+  if (/instagram\.com/.test(d)) return "إنستقرام";
+  if (/snapchat\.com/.test(d)) return "سناب شات";
+  if (/(facebook\.com|fb\.watch|fb\.com)/.test(d)) return "فيسبوك";
+  if (/(wa\.me|whatsapp\.com)/.test(d)) return "واتساب";
+  if (/^https?:\/\//.test(d)) return "موقع إلكتروني";
+  return null;
+};
+const firstUrl = s => (String(s || "").match(/https?:\/\/[^\s]+/) || [""])[0];
 const modeOf = p => (MSG.includes(platId(p)) ? "msg" : WEB.includes(platId(p)) ? "web" : "social");
 
 export default function Home() {
@@ -23,9 +34,46 @@ export default function Home() {
   const [deepBusy, setDeepBusy] = useState(false);
   const [err, setErr] = useState("");
   const [res, setRes] = useState(null);
+  const [shared, setShared] = useState(false);
   const resRef = useRef(null);
   const { copy, show, ui } = useCopy();
   const mode = modeOf(platform);
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
+    const q = new URLSearchParams(location.search);
+    const flag = q.get("share");
+    if (!flag) return;
+    (async () => {
+      let meta = { url: q.get("url") || "", text: q.get("text") || "", title: q.get("title") || "", files: 0 };
+      const files = [];
+      if (flag === "1" && "caches" in window) {
+        try {
+          const cache = await caches.open("radar-share");
+          const m = await cache.match("/__share/meta");
+          if (m) meta = await m.json();
+          for (let i = 0; i < (meta.files || 0); i++) {
+            const r = await cache.match(`/__share/file${i}`);
+            if (r) { const b = await r.blob(); files.push(new File([b], `shared${i}.jpg`, { type: b.type || "image/jpeg" })); }
+          }
+          for (const k of await cache.keys()) await cache.delete(k);
+        } catch {}
+      }
+      const link = meta.url || firstUrl(meta.text) || firstUrl(meta.title);
+      const rest = [meta.title, meta.text].filter(Boolean).join("\n").replace(link, "").trim();
+      const p = platFromUrl(link);
+      if (p) setPlatform(p);
+      if (link) setUrl(link);
+      if (rest && rest.length > 3) { setText(rest); setShowText(true); }
+      if (files.length) {
+        const out = [];
+        for (const f of files.slice(0, 3)) { try { out.push(await prepareImage(f)); } catch {} }
+        setImgs(out);
+      }
+      setShared(true);
+      history.replaceState(null, "", "/");
+    })();
+  }, []);
 
   async function addFiles(files) {
     let cur = [...imgs];
@@ -92,6 +140,7 @@ export default function Home() {
           </div>
 
           <div className="form sheet">
+            {shared && <div className="shared-note" role="status">{t("sharedIn")}</div>}
             <div className="grid2">
               <div className="field">
                 <label htmlFor="plat">{t("platform")}</label>

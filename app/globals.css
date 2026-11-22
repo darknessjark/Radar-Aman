@@ -77,6 +77,8 @@ textarea{min-height:120px;resize:vertical}
 .spin{display:inline-block;width:15px;height:15px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:s .8s linear infinite;vertical-align:-2px;margin-inline-end:8px}
 @keyframes s{to{transform:rotate(360deg)}}
 
+.shared-note{background:var(--teal-w);color:var(--teal-d);border-radius:8px;padding:9px 12px;font-size:14px;margin-bottom:14px}
+
 /* result */
 .result-wrap{scroll-margin-top:16px}
 .result-wrap .sheet{margin-top:8px}
@@ -141,6 +143,18 @@ html[dir=rtl] code{margin:2px 0 2px 4px}
 footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer p{margin:0 0 4px}
 
+.tabs{overflow-x:auto}.tab{white-space:nowrap}
+.igbar{border-radius:9px;padding:10px 14px;margin-bottom:12px;font-size:14px;background:var(--amber-w);color:var(--amber)}
+.igbar.on{background:var(--green-w);color:var(--green)}
+.post{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.post-img img{width:100%;border-radius:8px;display:block;border:1px solid var(--line)}
+.post-ph{aspect-ratio:4/5;border-radius:8px;background:var(--paper);display:grid;place-items:center;color:var(--muted);font-size:14px;border:1px dashed var(--line)}
+.post-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.score-sm{display:inline-grid;place-items:center;min-width:38px;height:38px;border-radius:50%;border:2px solid var(--red);color:var(--red);font-family:var(--f-d);font-weight:700}
+.post .field{margin:12px 0 0}
+a.btn{text-decoration:none;display:inline-block}
+.libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.libitem{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;gap:28px;padding:32px 0 24px}
   .rings{width:320px;height:320px;inset-inline-start:-80px}
@@ -157,6 +171,7 @@ footer p{margin:0 0 4px}
   .dial{width:210px}
   .case{grid-template-columns:auto minmax(0,1fr)}.case img{display:none}
   .acts{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+  .post{grid-template-columns:1fr}
   .lead{font-size:16.5px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
