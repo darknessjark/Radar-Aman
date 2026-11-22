@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
     <html lang="ar" dir="rtl">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#0D1B2A" />
+        <meta name="theme-color" content="#0A47A8" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="icon" href="/icon-192.png" />
         <link rel="apple-touch-icon" href="/icon-192.png" />

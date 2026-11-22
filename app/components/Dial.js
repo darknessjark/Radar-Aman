@@ -12,8 +12,8 @@ export default function Dial({ value = 0, color, label }) {
         <path d={arc(0, 40, 80)} className="trk g" /><path d={arc(40, 70, 80)} className="trk a" /><path d={arc(70, 100, 80)} className="trk r" />
         <path d={arc(0, 100, 80)} className="prog" stroke={color} pathLength="100" style={{ strokeDasharray: `${v} 100` }} />
         {ticks.map(i => { const [x1, y1] = pt(i, i % 10 === 0 ? 64 : 67), [x2, y2] = pt(i, 71); return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} className={i % 10 === 0 ? "tk big" : "tk"} />; })}
-        <g className="needle" style={{ transform: `rotate(${(v / 100) * 180}deg)` }}><line x1="100" y1="100" x2="42" y2="100" stroke="#0D1B2A" strokeWidth="2.4" strokeLinecap="round" /></g>
-        <circle cx="100" cy="100" r="5.5" fill="#0D1B2A" />
+        <g className="needle" style={{ transform: `rotate(${(v / 100) * 180}deg)` }}><line x1="100" y1="100" x2="42" y2="100" stroke="#0A2A5E" strokeWidth="2.4" strokeLinecap="round" /></g>
+        <circle cx="100" cy="100" r="5.5" fill="#0A2A5E" />
       </svg>
       <div className="dial-num" style={{ color }}>{label ?? value}</div>
     </div>
