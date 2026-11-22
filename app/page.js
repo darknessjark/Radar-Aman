@@ -134,10 +134,6 @@ export default function Home() {
             onCopy={() => copy(reportText(res.case, res.links, lang))} onCopyText={copy} />}
         </div>
 
-        <footer>
-          <p>{t("disclaimer")}</p>
-          <p>{t("ifPaid")}</p>
-        </footer>
       </main>
       {ui}
     </>
