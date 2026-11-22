@@ -134,7 +134,7 @@ export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, on
   if (simple) return (
     <article className="sheet simple">
       <div className="verdict-row">
-        <Dial value={v} label={t.n(v) + "٪"} color={col} />
+        <Dial value={v} label={t.n(v) + "%"} color={col} />
         <div className="verdict-copy">
           <div className="pct-lbl">{t("pct")}</div>
           <div className="verdict" style={{ color: col }}>{t(verdictKey(v))}</div>
@@ -160,7 +160,7 @@ export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, on
         <span className="note ltr">{fmtDate(c.createdAt)}</span>
       </div>
       <div className="verdict-row">
-        <Dial value={v} label={t.n(v) + "٪"} color={col} />
+        <Dial value={v} label={t.n(v) + "%"} color={col} />
         <div className="verdict-copy">
           <div className="verdict" style={{ color: col }}>{t(verdictKey(v))}</div>
           <div className="pills">

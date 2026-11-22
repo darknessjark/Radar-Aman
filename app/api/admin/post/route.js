@@ -25,7 +25,7 @@ export async function POST(req) {
     if (!c) return json({ error: "الحالة غير موجودة" }, 404);
 
     if (action === "draft") {
-      if (finalScore(c) < POST_MIN) return json({ error: `المنشورات للحالات ${POST_MIN}٪ فأكثر فقط.` }, 400);
+      if (finalScore(c) < POST_MIN) return json({ error: `المنشورات للحالات ${POST_MIN}% فأكثر فقط.` }, 400);
       c.post = { status: "draft", createdAt: new Date().toISOString(), ...(await draftPost(c)) };
       await saveCase(c); return json({ case: c });
     }
