@@ -74,7 +74,7 @@ function Details({ c, t, lang, officer }) {
 
       {(r.account_analysis || r.image_analysis) && (
         <div className={"grid2" + (r.account_analysis && r.image_analysis ? "" : " one")} style={{ marginTop: 14 }}>
-          {r.account_analysis && <section className="panel" style={{ margin: 0 }}><h3>{t("accountT")}</h3><p style={{ margin: 0 }} dir="auto">{r.account_analysis}</p></section>}
+          {r.account_analysis && <section className="panel" style={{ margin: 0 }}><h3>{t("accountT")}</h3>{r.account_signals && <div className="pills" style={{ marginTop: 0, marginBottom: 8 }}>{[["sigAge", r.account_signals.age], ["sigFollowers", r.account_signals.followers], ["sigEng", r.account_signals.engagement], ["sigComments", r.account_signals.comments]].filter(([, x]) => x && x !== "غير ظاهر").map(([k, x]) => <span key={k} className="pill">{t(k)}: {x}</span>)}</div>}<p style={{ margin: 0 }} dir="auto">{r.account_analysis}</p></section>}
           {r.image_analysis && <section className="panel" style={{ margin: 0 }}><h3>{t("imageT")}</h3><p style={{ margin: 0 }} dir="auto">{r.image_analysis}</p></section>}
         </div>
       )}
