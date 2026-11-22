@@ -70,7 +70,7 @@ function PostCard({ c, pw, ig, onCase, show, auto }) {
 
 export default function Posts({ cases, pw, onCase, show }) {
   const { t } = useLang();
-  const [info, setInfo] = useState({ igConnected: false, min: 80 });
+  const [info, setInfo] = useState({ igConnected: false, min: 65 });
   const seen = useRef(0);
   useEffect(() => { fetch("/api/admin/post", { headers: { "x-admin-password": pw } }).then(r => r.json()).then(setInfo).catch(() => {}); }, [pw]);
   const list = cases.filter(c => finalScore(c) >= info.min).sort((a, b) => (b.createdAt > a.createdAt ? 1 : -1));
