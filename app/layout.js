@@ -1,13 +1,19 @@
 import "./globals.css";
-export const metadata = { title: "رادار أمان — رصد إعلانات الاحتيال", description: "نظام إنذار مبكر لرصد إعلانات الاحتيال الإلكتروني بالذكاء الاصطناعي" };
+import { LangProvider } from "./components/Lang";
+export const metadata = {
+  title: "رادار أمان | Radar Aman",
+  description: "افحص إعلانات ورسائل ومواقع الاحتيال قبل أن تدفع | Check scam ads, messages and websites before you pay"
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body><LangProvider>{children}</LangProvider></body>
     </html>
   );
 }

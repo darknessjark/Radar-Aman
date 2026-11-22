@@ -1,15 +1,17 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import Logo from "../components/Logo";
+import TopBar from "../components/TopBar";
 import ResultView from "../components/ResultView";
 import useCopy from "../components/useCopy";
+import { useLang } from "../components/Lang";
 import { networks, linkedTo } from "@/lib/networks";
-import { reportText, riskColor, riskCls, toAr, fmtDate } from "@/lib/report";
+import { reportText, riskColor, riskCls, verdictKey, fmtDate } from "@/lib/report";
+import { STATUSES, statusKey, PLATFORMS, platId, KEY_KIND } from "@/lib/i18n";
 
-const STATUSES = ["جديد", "قيد المراجعة", "تم طلب الحذف من المنصة", "محوّل للتحقيق", "آمن — لا إجراء"];
 const scoreOf = c => (c.deep?.status === "done" ? c.deep.score_after : c.result?.risk_score ?? 0);
 
 export default function Admin() {
+  const { t, lang } = useLang();
   const [pw, setPw] = useState("");
   const [authed, setAuthed] = useState(false);
   const [cases, setCases] = useState([]);
@@ -31,7 +33,7 @@ export default function Admin() {
     try {
       const r = await fetch("/api/admin/cases", { headers: { "x-admin-password": p } });
       const j = await r.json();
-      if (!r.ok) throw new Error(j.error || "تعذر التحميل");
+      if (!r.ok) throw new Error(j.error || t("eLoad"));
       setCases(j.cases); setAuthed(true);
       try { sessionStorage.setItem("radar-pw", p); } catch {}
     } catch (e) { setErr(e.message); setAuthed(false); } finally { setLoading(false); }
@@ -39,8 +41,8 @@ export default function Admin() {
   async function update(id, body) {
     const r = await fetch("/api/admin/update", { method: "POST", headers: { "content-type": "application/json", "x-admin-password": pw }, body: JSON.stringify({ id, ...body }) });
     const j = await r.json();
-    if (!r.ok) return show(j.error || "تعذر التحديث");
-    if (body.remove) { setCases(cs => cs.filter(c => c.id !== id)); setOpen(null); show("تم الحذف"); }
+    if (!r.ok) return show(j.error || t("eUpd"));
+    if (body.remove) { setCases(cs => cs.filter(c => c.id !== id)); setOpen(null); show(t("deleted")); }
     else setCases(cs => cs.map(c => (c.id === id ? j.case : c)));
   }
   async function deep(id) {
@@ -48,7 +50,7 @@ export default function Admin() {
     try {
       const r = await fetch("/api/deep", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id }) });
       const j = await r.json().catch(() => ({}));
-      if (!r.ok) show(j.error || "تعذر الفحص المعمّق");
+      if (!r.ok) show(j.error || t("eDeep"));
       else setCases(cs => cs.map(c => (c.id === id ? j.case : c)));
     } finally { setDeepId(null); }
   }
@@ -65,98 +67,100 @@ export default function Admin() {
   }).sort((a, b) => scoreOf(b) - scoreOf(a) || (b.createdAt > a.createdAt ? 1 : -1)), [cases, fRisk, fStatus, fPlat]);
   const platforms = [...new Set(cases.map(c => c.platform))];
   const openCase = cases.find(c => c.id === open);
+  const keyLabel = k => { const [kind, v] = k.split("|"); return <span key={k}>{t(KEY_KIND[kind] || "k_site")} <code>{kind === "صورة" ? t("k_imgdup") : v}</code> </span>; };
+  const rep = (c) => reportText(c, linkedTo(c, cases).map(l => ({ id: l.o.id })), lang);
 
   if (!authed) return (
-    <div className="wrap" style={{ maxWidth: 420 }}>
-      <header><Logo /><div><h1>لوحة الضابط</h1><div className="sub">رادار أمان</div></div></header>
-      <div className="card">
-        <label>كلمة السر</label>
-        <input type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === "Enter" && load()} />
-        <div className="row"><button className="btn" onClick={() => load()} disabled={loading || !pw}>{loading ? "جاري الدخول..." : "دخول"}</button><a href="/" className="note">العودة لصفحة الفحص</a></div>
-        {err && <div className="err">{err}</div>}
-      </div>
-    </div>
+    <>
+      <TopBar />
+      <main className="wrap narrow">
+        <h1 className="h-page">{t("officer")}</h1>
+        <div className="sheet">
+          <div className="field"><label htmlFor="pw">{t("pw")}</label>
+            <input id="pw" type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === "Enter" && load()} /></div>
+          <div className="row"><button className="btn" onClick={() => load()} disabled={loading || !pw}>{loading ? t("entering") : t("enter")}</button><a href="/" className="note">{t("back")}</a></div>
+          {err && <div className="err" role="alert">{err}</div>}
+        </div>
+      </main>
+    </>
   );
 
   return (
-    <div className="wrap">
-      <header>
-        <Logo />
-        <div><h1>لوحة الضابط — رادار أمان</h1><div className="sub">كل الحالات المفحوصة مرتبة حسب الخطورة</div></div>
-        <button className="btn ghost sm" style={{ marginInlineStart: "auto" }} onClick={() => load()} disabled={loading}>{loading ? "..." : "↻ تحديث"}</button>
-      </header>
+    <>
+      <TopBar><button className="btn ghost sm" onClick={() => load()} disabled={loading}>{t("refresh")}</button></TopBar>
+      <main className="wrap">
+        <div className="page-head"><h1 className="h-page">{t("officer")}</h1><p className="note">{t("dashSub")}</p></div>
 
-      <div className="stats">
-        <div className="stat"><b>{toAr(cases.length)}</b><span>إعلانات تم فحصها</span></div>
-        <div className="stat"><b style={{ color: "var(--red)" }}>{toAr(cases.filter(c => scoreOf(c) >= 70).length)}</b><span>عالية الخطورة</span></div>
-        <div className="stat"><b style={{ color: "var(--accent2)" }}>{toAr(nets.length)}</b><span>شبكات مرتبطة</span></div>
-        <div className="stat"><b style={{ color: "var(--amber)" }}>{toAr(cases.filter(c => ["جديد", "قيد المراجعة"].includes(c.status) && scoreOf(c) >= 40).length)}</b><span>بانتظار إجراء</span></div>
-      </div>
-
-      <div className="tabs">
-        <button className={"tab" + (tab === "cases" ? " on" : "")} onClick={() => setTab("cases")}>الحالات</button>
-        <button className={"tab" + (tab === "nets" ? " on" : "")} onClick={() => setTab("nets")}>الشبكات المرتبطة</button>
-      </div>
-
-      {tab === "cases" && (<>
-        <div className="filters">
-          <select value={fRisk} onChange={e => setFRisk(e.target.value)}><option value="all">كل مستويات الخطورة</option><option value="high">عالية (٧٠+)</option><option value="mid">متوسطة (٤٠–٦٩)</option><option value="low">منخفضة</option></select>
-          <select value={fStatus} onChange={e => setFStatus(e.target.value)}><option value="all">كل الحالات</option>{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
-          <select value={fPlat} onChange={e => setFPlat(e.target.value)}><option value="all">كل المنصات</option>{platforms.map(p => <option key={p}>{p}</option>)}</select>
+        <div className="stats">
+          <div className="stat"><b>{t.n(cases.length)}</b><span>{t("stChecked")}</span></div>
+          <div className="stat"><b style={{ color: "var(--red)" }}>{t.n(cases.filter(c => scoreOf(c) >= 70).length)}</b><span>{t("stHigh")}</span></div>
+          <div className="stat"><b style={{ color: "var(--teal)" }}>{t.n(nets.length)}</b><span>{t("stNets")}</span></div>
+          <div className="stat"><b style={{ color: "var(--amber)" }}>{t.n(cases.filter(c => ["جديد", "قيد المراجعة"].includes(c.status) && scoreOf(c) >= 40).length)}</b><span>{t("stPending")}</span></div>
         </div>
-        {!list.length && <div className="empty">{cases.length ? "لا توجد حالات بهذه التصفية." : "لا توجد حالات بعد."}</div>}
-        {list.map(c => {
-          const r = c.result || {}, v = scoreOf(c), col = riskColor(v), ln = linkedTo(c, cases).length;
-          return (
-            <div className="case" key={c.id}>
-              <div style={{ display: "flex", gap: 8 }}>
-                <div className="score" style={{ background: col + "22", color: col, border: `1px solid ${col}` }}>{toAr(v)}</div>
-                {c.thumbs?.[0] && <img src={c.thumbs[0]} alt="" />}
-              </div>
-              <div>
-                <div style={{ fontWeight: 600 }}>{r.scam_type && r.scam_type !== "لا يوجد" ? r.scam_type : r.verdict}</div>
-                <div className="meta">{c.platform} · {fmtDate(c.createdAt)}{c.source === "رصد آلي" ? " · رصد آلي" : ""}
-                  {ln > 0 && <span style={{ color: "#ffb3b5" }}> · مرتبط بـ {toAr(ln)}</span>}
-                  {c.deep?.status === "done" && <span style={{ color: "var(--accent2)" }}> · 🔎 فُحص بعمق</span>}
-                  {(c.deep?.status === "running" || deepId === c.id) && <span style={{ color: "#9cc2ff" }}> · 🔎 جاري الفحص المعمّق</span>}
-                </div>
-                <div style={{ fontSize: 13.5, marginTop: 4 }}>{c.deep?.status === "done" ? c.deep.summary : r.summary}</div>
-              </div>
-              <div className="acts">
-                <select value={c.status} onChange={e => update(c.id, { status: e.target.value })}>{STATUSES.map(s => <option key={s}>{s}</option>)}</select>
-                <button className="btn ghost sm" onClick={() => setOpen(c.id)}>عرض التفاصيل</button>
-                <button className="btn ghost sm" onClick={() => copy(reportText(c, linkedTo(c, cases).map(l => ({ id: l.o.id }))))}>نسخ التقرير</button>
-                <button className="btn ghost sm" style={{ color: "#ff9b9e" }} onClick={() => { if (armed === c.id) { update(c.id, { remove: true }); setArmed(null); } else { setArmed(c.id); setTimeout(() => setArmed(a => (a === c.id ? null : a)), 3000); } }}>{armed === c.id ? "تأكيد الحذف" : "حذف"}</button>
-              </div>
-            </div>
-          );
-        })}
-      </>)}
 
-      {tab === "nets" && (<>
-        <p className="note" style={{ marginTop: 0 }}>يربط النظام تلقائيًا الإعلانات التي تشترك في رقم هاتف أو حساب بنكي أو موقع أو حساب تواصل أو صورة مكررة — مؤشر على أن جهة واحدة تقف خلفها.</p>
-        {!nets.length && <div className="empty">لم تُكتشف شبكات بعد.</div>}
-        {nets.map((n, i) => {
-          const max = Math.max(...n.members.map(scoreOf));
-          return (
-            <div className="net" key={i}>
-              <h4>شبكة #{toAr(i + 1)} — {toAr(n.members.length)} إعلانات <span className={`pill ${riskCls(max)}`}>أعلى خطورة {toAr(max)}</span></h4>
-              <div className="note" style={{ marginBottom: 6 }}>القاسم المشترك: {n.shared.map((k, j) => <span key={j}>{k.split("|")[0]} <code>{k.split("|")[1]}</code> </span>)}</div>
-              {n.members.map(m => <div className="member" key={m.id}><a href="#" onClick={e => { e.preventDefault(); setOpen(m.id); }}>{toAr(scoreOf(m))} · {m.platform} · {m.result?.scam_type}</a> <span className="note">— {fmtDate(m.createdAt)}</span></div>)}
-            </div>
-          );
-        })}
-      </>)}
+        <div className="tabs" role="tablist">
+          <button role="tab" className={"tab" + (tab === "cases" ? " on" : "")} onClick={() => setTab("cases")}>{t("tabCases")}</button>
+          <button role="tab" className={"tab" + (tab === "nets" ? " on" : "")} onClick={() => setTab("nets")}>{t("tabNets")}</button>
+        </div>
+
+        {tab === "cases" && (<>
+          <div className="filters">
+            <select aria-label={t("flagsT")} value={fRisk} onChange={e => setFRisk(e.target.value)}><option value="all">{t("fAllRisk")}</option><option value="high">{t("fHigh")}</option><option value="mid">{t("fMid")}</option><option value="low">{t("fLow")}</option></select>
+            <select aria-label="status" value={fStatus} onChange={e => setFStatus(e.target.value)}><option value="all">{t("fAllStatus")}</option>{STATUSES.map(s => <option key={s} value={s}>{t(statusKey(s))}</option>)}</select>
+            <select aria-label={t("platform")} value={fPlat} onChange={e => setFPlat(e.target.value)}><option value="all">{t("fAllPlat")}</option>{platforms.map(p => <option key={p} value={p}>{t("p_" + platId(p))}</option>)}</select>
+          </div>
+          {!list.length && <div className="empty">{cases.length ? t("noMatch") : t("noCases")}</div>}
+          {list.map(c => {
+            const r = c.result || {}, v = scoreOf(c), col = riskColor(v), ln = linkedTo(c, cases).length;
+            return (
+              <div className="case" key={c.id}>
+                <div className="score" style={{ borderColor: col, color: col }}>{t.n(v)}</div>
+                {c.thumbs?.[0] && <img src={c.thumbs[0]} alt="" />}
+                <div className="case-main">
+                  <div className="case-title">{r.scam_type && r.scam_type !== "لا يوجد" ? r.scam_type : t(verdictKey(v))}</div>
+                  <div className="meta">{t("p_" + platId(c.platform))} · <span className="ltr">{fmtDate(c.createdAt)}</span>{c.source === "رصد آلي" ? ` · ${t("auto")}` : ""}
+                    {ln > 0 && <span className="m-red"> · {t("linkedN", { n: t.n(ln) })}</span>}
+                    {c.deep?.status === "done" && <span className="m-teal"> · {t("deepDone")}</span>}
+                    {(c.deep?.status === "running" || deepId === c.id) && <span className="m-teal"> · {t("deepRunning")}</span>}
+                  </div>
+                  <div className="case-sum" dir="auto">{c.deep?.status === "done" ? c.deep.summary : r.summary}</div>
+                </div>
+                <div className="acts">
+                  <select aria-label="status" value={c.status} onChange={e => update(c.id, { status: e.target.value })}>{STATUSES.map(s => <option key={s} value={s}>{t(statusKey(s))}</option>)}</select>
+                  <button className="btn ghost sm" onClick={() => setOpen(c.id)}>{t("details")}</button>
+                  <button className="btn ghost sm" onClick={() => copy(rep(c))}>{t("copy")}</button>
+                  <button className="btn ghost sm danger" onClick={() => { if (armed === c.id) { update(c.id, { remove: true }); setArmed(null); } else { setArmed(c.id); setTimeout(() => setArmed(a => (a === c.id ? null : a)), 3000); } }}>{armed === c.id ? t("delConfirm") : t("del")}</button>
+                </div>
+              </div>
+            );
+          })}
+        </>)}
+
+        {tab === "nets" && (<>
+          <p className="note" style={{ marginTop: 0 }}>{t("netsNote")}</p>
+          {!nets.length && <div className="empty">{t("noNets")}</div>}
+          {nets.map((n, i) => {
+            const max = Math.max(...n.members.map(scoreOf));
+            return (
+              <div className="net" key={i}>
+                <h4>{t("netN", { i: t.n(i + 1), n: t.n(n.members.length) })} <span className={`pill ${riskCls(max)}`}>{t("maxRisk", { n: t.n(max) })}</span></h4>
+                <div className="note" style={{ marginBottom: 6 }}>{t("common")}: {n.shared.map(keyLabel)}</div>
+                {n.members.map(m => <div className="member" key={m.id}><a href="#" onClick={e => { e.preventDefault(); setOpen(m.id); }}>{t.n(scoreOf(m))} · {t("p_" + platId(m.platform))} · {m.result?.scam_type}</a> <span className="note ltr">{fmtDate(m.createdAt)}</span></div>)}
+              </div>
+            );
+          })}
+        </>)}
+      </main>
 
       {openCase && (
         <div className="modal" onClick={e => e.target === e.currentTarget && setOpen(null)}>
           <ResultView c={openCase} links={linkedTo(openCase, cases).map(l => ({ id: l.o.id, shared: l.shared }))}
             onDeep={() => deep(openCase.id)} deepBusy={deepId === openCase.id}
-            onCopy={() => copy(reportText(openCase, linkedTo(openCase, cases).map(l => ({ id: l.o.id }))))}
-            extra={<button className="btn ghost sm" onClick={() => setOpen(null)}>إغلاق</button>} />
+            onCopy={() => copy(rep(openCase))} onCopyText={copy}
+            extra={<button className="btn ghost" onClick={() => setOpen(null)}>{t("close")}</button>} />
         </div>
       )}
       {ui}
-    </div>
+    </>
   );
 }
