@@ -1,5 +1,5 @@
 import { getCase, saveCase, redis } from "@/lib/db";
-import { draftPost, igConnected, publishToInstagram, scrub, finalScore, POST_MIN, detectSensitive, cleanBoxes } from "@/lib/post";
+import { draftPost, igConnected, publishToInstagram, scrub, finalScore, POST_MIN, detectSensitive, cleanBoxes, cleanCrop } from "@/lib/post";
 import { json, fail, isAdmin } from "../../_util";
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -10,7 +10,11 @@ export async function GET(req) {
   if (img) {
     if (!/^[a-z0-9]{6,40}$/i.test(img)) return json({ error: "غير موجود" }, 404);
     const b64 = await redis().get(`caseimg:${img}`);
-    return b64 ? json({ image: "data:image/jpeg;base64," + b64 }) : json({ error: "لا توجد صورة محفوظة لهذه الحالة." }, 404);
+    if (b64) return json({ image: "data:image/jpeg;base64," + b64 });
+    // older cases kept only a small thumbnail: use it so the officer does not have to attach the picture again
+    const old = await getCase(img);
+    const th = old?.thumbs?.[0];
+    return th ? json({ image: th, lowres: true }) : json({ error: "لا توجد صورة محفوظة لهذه الحالة." }, 404);
   }
   return json({ igConnected: igConnected(), min: POST_MIN });
 }
@@ -20,7 +24,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const body_reviewed = body.reviewed === true;
-    const { id, action, caption, headline, points, image, boxes, mode, detected } = body;
+    const { id, action, caption, headline, points, image, boxes, crop, mode, detected } = body;
     const c = await getCase(id);
     if (!c) return json({ error: "الحالة غير موجودة" }, 404);
 
@@ -33,14 +37,14 @@ export async function POST(req) {
       if (!/^data:image\/jpeg;base64,/.test(image || "") || image.length > 1_200_000) return json({ error: "الصورة غير صالحة أو كبيرة." }, 400);
       await redis().set(`caseimg:${c.id}`, image.split(",")[1], { ex: 60 * 60 * 24 * 30 });
       c.hasImage = true;
-      if (c.post) { c.post.boxes = []; c.post.detected = false; c.post.mode = "shot"; }
+      if (c.post) { c.post.boxes = []; c.post.crop = null; c.post.detected = false; c.post.mode = "shot"; }
       await saveCase(c); return json({ case: c });
     }
     if (action === "detect") {
       const b64 = await redis().get(`caseimg:${c.id}`);
-      if (!b64) return json({ error: "لا توجد صورة محفوظة لهذه الحالة." }, 404);
-      const found = await detectSensitive("data:image/jpeg;base64," + b64);
-      return json({ boxes: found });
+      const src = b64 ? "data:image/jpeg;base64," + b64 : c.thumbs?.[0];
+      if (!src) return json({ error: "لا توجد صورة محفوظة لهذه الحالة." }, 404);
+      return json(await detectSensitive(src));
     }
     if (!c.post) return json({ error: "جهّز المنشور أولًا." }, 400);
 
@@ -49,7 +53,8 @@ export async function POST(req) {
       if (typeof headline === "string") c.post.headline = scrub(headline).slice(0, 80);
       if (Array.isArray(points)) c.post.points = points.slice(0, 3).map(p => scrub(p).slice(0, 90));
       if (Array.isArray(boxes)) c.post.boxes = cleanBoxes(boxes);
-      if (mode === "shot" || mode === "text") c.post.mode = mode === "shot" && c.hasImage ? "shot" : "text";
+      if (crop === null || typeof crop === "object") c.post.crop = cleanCrop(crop);
+      if (mode === "shot" || mode === "text") c.post.mode = mode === "shot" && (c.hasImage || c.thumbs?.length) ? "shot" : "text";
       if (typeof detected === "boolean") c.post.detected = detected;
       await saveCase(c); return json({ case: c });
     }

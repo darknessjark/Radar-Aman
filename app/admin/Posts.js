@@ -17,7 +17,11 @@ function PostCard({ c, pw, ig, onCase, show, auto }) {
   const [busy, setBusy] = useState("");
   const [shot, setShot] = useState("");
   const [boxes, setBoxes] = useState(p?.boxes || []);
-  const [mode, setMode] = useState(p?.mode || (c.hasImage ? "shot" : "text"));
+  const [crop, setCrop] = useState(p?.crop || null);
+  const [tool, setTool] = useState("hide");
+  const [low, setLow] = useState(false);
+  const hasShot = !!(c.hasImage || c.thumbs?.length);
+  const [mode, setMode] = useState(p?.mode || (hasShot ? "shot" : "text"));
   const [reviewed, setReviewed] = useState(false);
   const [drag, setDrag] = useState(null);
   const pad = useRef(null);
@@ -31,10 +35,10 @@ function PostCard({ c, pw, ig, onCase, show, auto }) {
   const draft = async () => { setBusy("draft"); try { const j = await call({ action: "draft" }); setCap(j.case.post.caption); setHead(j.case.post.headline); setPts(j.case.post.points); } catch (e) { show(e.message); } finally { setBusy(""); } };
   useEffect(() => { if (!p && auto) draft(); }, []);
   // load the saved screenshot of the case (if any) once the draft exists
-  useEffect(() => { if (p && c.hasImage && !shot) get("/api/admin/post?img=" + c.id).then(j => setShot(j.image)).catch(() => {}); }, [!!p, c.hasImage]);
+  useEffect(() => { if (p && hasShot && !shot) get("/api/admin/post?img=" + c.id).then(j => { setShot(j.image); setLow(!!j.lowres); }).catch(() => {}); }, [!!p, hasShot]);
   const detect = async () => {
     setBusy("detect");
-    try { const j = await call2({ action: "detect" }); setBoxes(j.boxes); await call({ action: "save", boxes: j.boxes, detected: true }); } catch (e) { show(e.message); } finally { setBusy(""); }
+    try { const j = await call2({ action: "detect" }); setBoxes(j.boxes); setCrop(j.crop || null); setReviewed(false); await call({ action: "save", boxes: j.boxes, crop: j.crop || null, detected: true }); } catch (e) { show(e.message); } finally { setBusy(""); }
   };
   const call2 = async body => {
     const r = await fetch("/api/admin/post", { method: "POST", headers: { "content-type": "application/json", "x-admin-password": pw }, body: JSON.stringify({ id: c.id, ...body }) });
@@ -42,14 +46,14 @@ function PostCard({ c, pw, ig, onCase, show, auto }) {
   };
   // first time a screenshot is available: find the private parts automatically
   useEffect(() => { if (shot && p && !p.detected && !busy) detect(); }, [!!shot, p?.createdAt]);
-  useEffect(() => { setMode(p?.mode || (c.hasImage ? "shot" : "text")); setBoxes(p?.boxes || []); }, [p?.createdAt, c.hasImage]);
+  useEffect(() => { setMode(p?.mode || (hasShot ? "shot" : "text")); setBoxes(p?.boxes || []); setCrop(p?.crop || null); }, [p?.createdAt, hasShot]);
   const upload = async f => {
     if (!f) return;
     setBusy("upload");
     try {
       const im = await prepareImage(f);
       const j = await call({ action: "image", image: im.post });
-      setShot(im.post); setBoxes([]); setMode("shot"); setReviewed(false);
+      setShot(im.post); setLow(false); setBoxes([]); setCrop(null); setMode("shot"); setReviewed(false);
       await call({ action: "save", mode: "shot", boxes: [], detected: false });
     } catch (e) { show(e.message); } finally { setBusy(""); }
   };
@@ -64,18 +68,19 @@ function PostCard({ c, pw, ig, onCase, show, auto }) {
     if (w < 0.015 && h < 0.015) {
       const i = [...boxes].map((bx, k) => ({ bx, k })).reverse().find(({ bx }) => a.x >= bx.x && a.x <= bx.x + bx.w && a.y >= bx.y && a.y <= bx.y + bx.h);
       if (i) saveBoxes(boxes.filter((_, k) => k !== i.k));
-    } else saveBoxes([...boxes, { x, y, w, h }]);
+    } else if (tool === "crop") { const cr = { x, y, w, h }; setCrop(cr); setReviewed(false); call({ action: "save", crop: cr }).catch(e => show(e.message)); }
+    else saveBoxes([...boxes, { x, y, w, h }]);
   };
   const useShot = mode === "shot" && !!shot;
   useEffect(() => { if (p) { setCap(p.caption); setHead(p.headline); setPts(p.points || []); } }, [p?.createdAt]);
-  const sig = JSON.stringify(boxes);
-  useEffect(() => { if (!head) return; const id = setTimeout(async () => setImg(await renderPostImage({ headline: head, points: pts, scamType: p?.scamType, shot: useShot ? shot : "", boxes })), 250); return () => clearTimeout(id); }, [head, pts.join("|"), p?.scamType, useShot, shot, sig]);
+  const sig = JSON.stringify(boxes) + JSON.stringify(crop);
+  useEffect(() => { if (!head) return; const id = setTimeout(async () => setImg(await renderPostImage({ headline: head, points: pts, scamType: p?.scamType, shot: useShot ? shot : "", boxes, crop })), 250); return () => clearTimeout(id); }, [head, pts.join("|"), p?.scamType, useShot, shot, sig]);
 
   const approve = async () => {
     setBusy("approve");
     try {
-      await call({ action: "save", caption: cap, headline: head, points: pts, boxes, mode: useShot ? "shot" : "text" });
-      const image = await renderPostImage({ headline: head, points: pts, scamType: p?.scamType, shot: useShot ? shot : "", boxes });
+      await call({ action: "save", caption: cap, headline: head, points: pts, boxes, crop, mode: useShot ? "shot" : "text" });
+      const image = await renderPostImage({ headline: head, points: pts, scamType: p?.scamType, shot: useShot ? shot : "", boxes, crop });
       const j = await call({ action: "approve", caption: cap, image, reviewed: useShot ? reviewed : true });
       show(j.published ? t("pPublished") : t("pApprovedNoIg"));
     } catch (e) { show(e.message); } finally { setBusy(""); }
@@ -108,13 +113,20 @@ function PostCard({ c, pw, ig, onCase, show, auto }) {
             <div className="field">
               <label>{t("pCover")}</label>
               <p className="note" style={{ margin: "0 0 8px" }}>{busy === "detect" ? <><span className="spin" />{t("pDetecting")}</> : t("pCoverHelp")}</p>
+              {low && <p className="note" style={{ margin: "0 0 8px", color: "var(--amber)" }}>{t("pLowRes")}</p>}
+              {!done && <div className="seg" style={{ marginBottom: 8 }}>
+                <button type="button" className={tool === "hide" ? "on" : ""} onClick={() => setTool("hide")}>{t("pToolHide")}</button>
+                <button type="button" className={tool === "crop" ? "on" : ""} onClick={() => setTool("crop")}>{t("pToolCrop")}</button>
+              </div>}
               <div className="shot" ref={pad} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={() => setDrag(null)}>
                 <img src={shot} alt="" draggable={false} />
                 {boxes.map((b, i) => <span key={i} className="cover" style={{ left: b.x * 100 + "%", top: b.y * 100 + "%", width: b.w * 100 + "%", height: b.h * 100 + "%" }} />)}
-                {drag && <span className="cover draft" style={{ left: Math.min(drag.a.x, drag.b.x) * 100 + "%", top: Math.min(drag.a.y, drag.b.y) * 100 + "%", width: Math.abs(drag.a.x - drag.b.x) * 100 + "%", height: Math.abs(drag.a.y - drag.b.y) * 100 + "%" }} />}
+                {crop && <span className="cropframe" style={{ left: crop.x * 100 + "%", top: crop.y * 100 + "%", width: crop.w * 100 + "%", height: crop.h * 100 + "%" }} />}
+                {drag && <span className={"cover draft" + (tool === "crop" ? " crop" : "")} style={{ left: Math.min(drag.a.x, drag.b.x) * 100 + "%", top: Math.min(drag.a.y, drag.b.y) * 100 + "%", width: Math.abs(drag.a.x - drag.b.x) * 100 + "%", height: Math.abs(drag.a.y - drag.b.y) * 100 + "%" }} />}
               </div>
               {!done && <div className="row" style={{ marginTop: 8 }}>
                 <button type="button" className="btn ghost sm" onClick={detect} disabled={!!busy}>{t("pDetect")}</button>
+                <button type="button" className="btn ghost sm" onClick={() => { setCrop(null); setReviewed(false); call({ action: "save", crop: null }).catch(() => {}); }} disabled={!!busy || !crop}>{t("pClearCrop")}</button>
                 <button type="button" className="btn ghost sm" onClick={() => saveBoxes([])} disabled={!!busy || !boxes.length}>{t("pClearBoxes")}</button>
               </div>}
             </div>
