@@ -1,6 +1,6 @@
 "use client";
 import { riskColor, riskCls, verdictKey, fmtDate, evidenceList, platformReport } from "@/lib/report";
-import { AREA_KEYS, KEY_KIND, platId } from "@/lib/i18n";
+import { AREA_KEYS, KEY_KIND, TACTIC_EN, platId } from "@/lib/i18n";
 import { useLang } from "./Lang";
 import Dial from "./Dial";
 
@@ -104,7 +104,7 @@ export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, on
         </section>
       )}
 
-      {(r.tactics || []).length > 0 && <div className="pills" style={{ margin: "14px 0 0" }}><span className="lbl" style={{ margin: 0 }}>{t("tactics")}</span> {r.tactics.map((x, i) => <span key={i} className="pill red">{x}</span>)}</div>}
+      {(r.tactics || []).length > 0 && <div className="pills" style={{ margin: "14px 0 0" }}><span className="lbl" style={{ margin: 0 }}>{t("tactics")}</span> {r.tactics.map((x, i) => <span key={i} className="pill red">{lang === "en" ? TACTIC_EN[x] || x : x}</span>)}</div>}
 
       {(r.account_analysis || r.image_analysis) && (
         <div className={"grid2" + (r.account_analysis && r.image_analysis ? "" : " one")} style={{ marginTop: 14 }}>
