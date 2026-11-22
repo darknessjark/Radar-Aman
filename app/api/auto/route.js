@@ -6,12 +6,27 @@ import { json, fail } from "../_util";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
+const authed = (given) => { const key = process.env.AUTO_KEY; return !!key && given === key; };
+
+// GET variant: lets the scheduled monitor (which can only fetch URLs) submit one ad at a time.
+export async function GET(req) {
+  const u = new URL(req.url);
+  if (!authed(u.searchParams.get("key"))) return json({ error: "غير مصرح" }, 401);
+  const ad = { id: u.searchParams.get("id"), pageName: u.searchParams.get("page"), title: u.searchParams.get("title"), keyword: u.searchParams.get("kw") };
+  try { return json(await processAds([ad])); } catch (e) { return fail(e); }
+}
+
 export async function POST(req) {
-  const key = process.env.AUTO_KEY;
-  if (!key || req.headers.get("x-auto-key") !== key) return json({ error: "غير مصرح" }, 401);
+  if (!authed(req.headers.get("x-auto-key"))) return json({ error: "غير مصرح" }, 401);
   try {
     const body = await req.json();
-    const ads = (Array.isArray(body.ads) ? body.ads : []).slice(0, 5);
+    return json(await processAds(Array.isArray(body.ads) ? body.ads : []));
+  } catch (e) { return fail(e); }
+}
+
+async function processAds(list) {
+  {
+    const ads = list.slice(0, 5);
     const cap = +process.env.AUTO_DAILY_LIMIT || 3;
     const db = redis();
     const out = [];
@@ -28,6 +43,6 @@ export async function POST(req) {
       const r = await runScan({ platform: "فيسبوك", sourceUrl: `https://www.facebook.com/ads/library/?id=${id}`, text }, "رصد آلي");
       out.push(r.error ? { id, error: r.error } : { id, caseId: r.case.id, score: r.case.result?.risk_score ?? null });
     }
-    return json({ results: out });
-  } catch (e) { return fail(e); }
+    return { results: out };
+  }
 }
