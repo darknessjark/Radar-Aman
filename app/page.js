@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import TopBar from "./components/TopBar";
 import ResultView from "./components/ResultView";
 import useCopy from "./components/useCopy";
+import PlatformSelect from "./components/PlatformSelect";
 import { useLang } from "./components/Lang";
 import { prepareImage } from "@/lib/clientImage";
 import { reportText } from "@/lib/report";
@@ -157,7 +158,7 @@ export default function Home() {
             <div className="grid2">
               <div className="field">
                 <label htmlFor="plat">{t("platform")}</label>
-                <select id="plat" value={platform} onChange={e => setPlatform(e.target.value)}>{PLATFORMS.map(([v, id]) => <option key={v} value={v}>{t("p_" + id)}</option>)}</select>
+                <PlatformSelect id="plat" value={platform} onChange={setPlatform} options={PLATFORMS.map(([v, id]) => ({ value: v, id, label: t("p_" + id) }))} />
               </div>
               <div className="field">
                 <label htmlFor="url">{mode === "msg" ? t("urlMsg") : mode === "web" ? t("urlWeb") : t("urlSocial")}</label>

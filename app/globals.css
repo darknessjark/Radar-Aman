@@ -209,3 +209,16 @@ a.btn{text-decoration:none;display:inline-block}
   .lead{font-size:16.5px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.plat-sel{position:relative}
+.plat-btn{width:100%;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:7px 12px;font:inherit;font-size:15px;cursor:pointer;text-align:start;min-height:44px}
+.plat-btn:focus-visible{border-color:var(--teal);outline:2px solid var(--teal-w)}
+.plat-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plat-chev{flex:none;color:var(--muted);transition:transform .15s}
+.plat-btn[aria-expanded=true] .plat-chev{transform:rotate(180deg)}
+.plat-ico{flex:none;width:26px;height:26px;border-radius:7px;object-fit:contain;display:block}
+.plat-other{display:flex;align-items:center;justify-content:center;background:var(--line2);color:var(--muted)}
+.plat-list{position:absolute;z-index:30;inset-inline:0;top:calc(100% + 4px);margin:0;padding:4px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 28px rgba(10,42,94,.16);max-height:320px;overflow:auto}
+.plat-list li{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:7px;cursor:pointer;font-size:15px;color:var(--ink)}
+.plat-list li.hi{background:var(--teal-w)}
+.plat-list li.on{font-weight:600}
