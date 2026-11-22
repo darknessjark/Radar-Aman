@@ -124,6 +124,7 @@ export default function Admin() {
                   <div className="case-title">{r.scam_type && r.scam_type !== "لا يوجد" ? r.scam_type : t(verdictKey(v))}</div>
                   <div className="meta">{t("p_" + platId(c.platform))} · <span className="ltr">{fmtDate(c.createdAt)}</span>{c.source === "رصد آلي" ? ` · ${t("auto")}` : ""}
                     {ln > 0 && <span className="m-red"> · {t("linkedN", { n: t.n(ln) })}</span>}
+                    {c.userReports > 0 && <span className="m-red"> · {t("userReports", { n: t.n(c.userReports) })}</span>}
                     {c.deep?.status === "done" && <span className="m-teal"> · {t("deepDone")}</span>}
                     {(c.deep?.status === "running" || deepId === c.id) && <span className="m-teal"> · {t("deepRunning")}</span>}
                   </div>

@@ -53,46 +53,12 @@ function Kit({ c, t, onCopy }) {
   );
 }
 
-export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, onCopyText, extra }) {
-  const { t, lang } = useLang();
-  const r = c.result || {};
-  const v = c.deep?.status === "done" && typeof c.deep.score_after === "number" ? c.deep.score_after : r.risk_score ?? 0;
-  const col = riskColor(v), p = r.price_analysis || {};
+function Details({ c, t, lang, officer }) {
+  const r = c.result || {}, p = r.price_analysis || {};
   const gap = Math.max(0, Math.min(100, Math.round(+p.gap_percent || 0)));
   const lc = r.link_check || [];
   const ents = ENT.filter(k => (r.entities?.[k] || []).length);
-  const canDeep = onDeep && !deepBusy && c.deep?.status !== "running";
-  const conf = CONF[r.confidence] ? t(CONF[r.confidence]) : r.confidence || "—";
-  return (
-    <article className="sheet">
-      <div className="sheet-head">
-        <span className="mono">CASE {c.id.slice(0, 8).toUpperCase()}</span>
-        <span className="note ltr">{fmtDate(c.createdAt)}</span>
-      </div>
-      <div className="verdict-row">
-        <Dial value={v} label={t.n(v)} color={col} />
-        <div className="verdict-copy">
-          <div className="verdict" style={{ color: col }}>{t(verdictKey(v))}</div>
-          <div className="pills">
-            {r.scam_type && r.scam_type !== "لا يوجد" && <span className={`pill ${riskCls(v)}`}>{r.scam_type}</span>}
-            {r.impersonated_entity && <span className="pill">{t("impersonates", { x: r.impersonated_entity })}</span>}
-            <span className="pill">{t("confidence")}: {conf}</span>
-            <span className="pill">{t("p_" + platId(c.platform))}</span>
-            {c.source === "رصد آلي" && <span className="pill">{t("auto")}</span>}
-          </div>
-          <p className="summary" dir="auto">{c.deep?.status === "done" && c.deep.summary ? c.deep.summary : r.summary}</p>
-        </div>
-      </div>
-
-      {links.length > 0 && (
-        <div className="linkwarn">
-          <b>{t("linked", { n: t.n(links.length) })}</b>
-          {links[0].shared && <div className="note">{t("via")}: {[...new Set(links.flatMap(l => l.shared || []))].map((k, i) => <span key={i}>{t(KEY_KIND[k.split("|")[0]] || "k_site")} <code>{k.split("|")[0] === "صورة" ? t("k_imgdup") : k.split("|")[1]}</code> </span>)}</div>}
-        </div>
-      )}
-
-      <Deep d={c.deep} busy={deepBusy} t={t} />
-
+  return (<>
       {p.advertised && p.market_estimate && (
         <section className="panel">
           <h3>{t("priceT")}{gap > 0 && <span className={`pill ${gap >= 50 ? "red" : gap >= 25 ? "amber" : "green"}`}>{t("below", { n: t.n(gap) })}</span>}</h3>
@@ -132,10 +98,93 @@ export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, on
         <section className="panel" style={{ margin: 0 }}>
           <h3>{t("entT")}</h3>
           {ents.length ? ents.map(k => <div key={k} className="ent"><span className="lbl">{t("e_" + k)}</span>{r.entities[k].map((x, i) => <code key={i}>{x}</code>)}</div>) : <p className="note" style={{ margin: 0 }}>{t("noEnt")}</p>}
-          <h3 style={{ marginTop: 16 }}>{t("officerT")}</h3><p style={{ margin: 0 }} dir="auto">{r.officer_action}</p>
-          <h3 style={{ marginTop: 16 }}>{t("adviceT")}</h3><p style={{ margin: 0 }} dir="auto">{r.citizen_advice}</p>
+          {officer && <><h3 style={{ marginTop: 16 }}>{t("officerT")}</h3><p style={{ margin: 0 }} dir="auto">{r.officer_action}</p></>}
+          {officer && <><h3 style={{ marginTop: 16 }}>{t("adviceT")}</h3><p style={{ margin: 0 }} dir="auto">{r.citizen_advice}</p></>}
         </section>
       </div>
+
+  </>);
+}
+
+function Reasons({ r, t }) {
+  const list = (r.reasons || []).length ? r.reasons : (r.red_flags || []).map(f => f.title);
+  if (!list.length) return null;
+  return (
+    <section className="simple-sec">
+      <h3>{t("whyT")}</h3>
+      <ol className="reasons" dir="auto">{list.slice(0, 4).map((x, i) => <li key={i}>{x}</li>)}</ol>
+    </section>
+  );
+}
+
+function ReportBox({ c, t, onReport, reporting, reportedHere }) {
+  if (reportedHere) return <div className="reported" role="status"><b>{t("reported")}</b><span>{t("reportedD")}</span></div>;
+  return <button className="btn report-btn" onClick={onReport} disabled={reporting}>{reporting ? <><span className="spin" />{t("reporting")}</> : t("reportBtn")}</button>;
+}
+
+export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, onCopyText, extra, simple, onReport, reporting, reportedHere }) {
+  const { t, lang } = useLang();
+  const r = c.result || {};
+  const v = c.deep?.status === "done" && typeof c.deep.score_after === "number" ? c.deep.score_after : r.risk_score ?? 0;
+  const col = riskColor(v);
+  const canDeep = onDeep && !deepBusy && c.deep?.status !== "running";
+  const conf = CONF[r.confidence] ? t(CONF[r.confidence]) : r.confidence || "—";
+  const scam = r.scam_type && r.scam_type !== "لا يوجد" ? r.scam_type : null;
+
+  if (simple) return (
+    <article className="sheet simple">
+      <div className="verdict-row">
+        <Dial value={v} label={t.n(v) + "٪"} color={col} />
+        <div className="verdict-copy">
+          <div className="pct-lbl">{t("pct")}</div>
+          <div className="verdict" style={{ color: col }}>{t(verdictKey(v))}</div>
+          {scam && <div className="scam-type">{scam}</div>}
+        </div>
+      </div>
+      {links.length > 0 && <div className="linkwarn">{t("linkedSimple", { n: t.n(links.length) })}</div>}
+      <Reasons r={r} t={t} />
+      {r.citizen_advice && <section className="simple-sec"><h3>{t("todoT")}</h3><p dir="auto">{r.citizen_advice}</p></section>}
+      {v >= 40 && <ReportBox c={c} t={t} onReport={onReport} reporting={reporting} reportedHere={reportedHere} />}
+      <Deep d={c.deep} busy={deepBusy} t={t} />
+      {canDeep && c.deep?.status !== "done" && (
+        <div className="deep-cta"><p className="note">{t("deepHint")}</p><button className="btn ghost" onClick={onDeep}>{t("deepBtn")}</button></div>
+      )}
+      <details className="more"><summary>{t("moreT")}</summary><Details c={c} t={t} lang={lang} /></details>
+    </article>
+  );
+
+  return (
+    <article className="sheet">
+      <div className="sheet-head">
+        <span className="mono">CASE {c.id.slice(0, 8).toUpperCase()}</span>
+        <span className="note ltr">{fmtDate(c.createdAt)}</span>
+      </div>
+      <div className="verdict-row">
+        <Dial value={v} label={t.n(v) + "٪"} color={col} />
+        <div className="verdict-copy">
+          <div className="verdict" style={{ color: col }}>{t(verdictKey(v))}</div>
+          <div className="pills">
+            {scam && <span className={`pill ${riskCls(v)}`}>{scam}</span>}
+            {r.impersonated_entity && <span className="pill">{t("impersonates", { x: r.impersonated_entity })}</span>}
+            <span className="pill">{t("confidence")}: {conf}</span>
+            <span className="pill">{t("p_" + platId(c.platform))}</span>
+            {c.userReports > 0 && <span className="pill red">{t("userReports", { n: t.n(c.userReports) })}</span>}
+            {c.source === "رصد آلي" && <span className="pill">{t("auto")}</span>}
+          </div>
+          <p className="summary" dir="auto">{c.deep?.status === "done" && c.deep.summary ? c.deep.summary : r.summary}</p>
+        </div>
+      </div>
+
+      {links.length > 0 && (
+        <div className="linkwarn">
+          <b>{t("linked", { n: t.n(links.length) })}</b>
+          {links[0].shared && <div className="note">{t("via")}: {[...new Set(links.flatMap(l => l.shared || []))].map((k, i) => <span key={i}>{t(KEY_KIND[k.split("|")[0]] || "k_site")} <code>{k.split("|")[0] === "صورة" ? t("k_imgdup") : k.split("|")[1]}</code> </span>)}</div>}
+        </div>
+      )}
+
+      <Deep d={c.deep} busy={deepBusy} t={t} />
+      <Reasons r={r} t={t} />
+      <Details c={c} t={t} lang={lang} officer />
 
       <Kit c={c} t={t} onCopy={onCopyText || (() => {})} />
 

@@ -15,7 +15,7 @@ export default function Dial({ value = 0, color, label }) {
         <g className="needle" style={{ transform: `rotate(${(v / 100) * 180}deg)` }}><line x1="100" y1="100" x2="42" y2="100" stroke="#0D1B2A" strokeWidth="2.4" strokeLinecap="round" /></g>
         <circle cx="100" cy="100" r="5.5" fill="#0D1B2A" />
       </svg>
-      <div className="dial-num" style={{ color }}>{label ?? value}<small dir="ltr">/100</small></div>
+      <div className="dial-num" style={{ color }}>{label ?? value}</div>
     </div>
   );
 }

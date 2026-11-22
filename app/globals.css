@@ -118,6 +118,26 @@ html[dir=rtl] code{margin:2px 0 2px 4px}
 .evl{margin:0;padding-inline-start:20px}.evl li{margin-bottom:6px;font-size:14.5px}
 .evid{font-family:var(--f-m);font-size:11px;color:var(--muted);direction:ltr;text-align:start;word-break:break-all;margin-top:18px}
 
+/* simple public result */
+.sheet.simple{padding:26px}
+.pct-lbl{font-size:14px;color:var(--muted);margin-bottom:2px}
+.scam-type{font-size:16px;color:var(--ink2);margin-top:6px}
+.simple-sec{margin-top:22px}
+.simple-sec h3{font-size:18px;margin-bottom:8px}
+.simple-sec p{margin:0;font-size:16.5px}
+ol.reasons{margin:0;padding-inline-start:24px;font-size:16.5px}
+ol.reasons li{margin-bottom:8px;padding-inline-start:4px}
+ol.reasons li::marker{font-family:var(--f-d);font-weight:700;color:var(--ink2)}
+.report-btn{width:100%;margin-top:22px;padding:14px;font-size:17px;background:var(--red);border-color:var(--red)}
+.report-btn:hover{background:#A32F22}
+.reported{margin-top:22px;border-radius:10px;padding:14px 16px;background:var(--green-w);color:var(--green);display:flex;flex-direction:column;gap:2px}
+.reported b{font-family:var(--f-d);font-size:17px}
+.deep-cta{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.deep-cta .note{margin:0;max-width:30em}
+details.more{margin-top:18px;border-top:1px solid var(--line2);padding-top:12px}
+details.more summary{cursor:pointer;color:var(--teal);font-weight:500;font-size:15px}
+details.more[open] summary{margin-bottom:6px}
+
 /* admin */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 16px}

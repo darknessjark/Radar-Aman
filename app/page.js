@@ -35,6 +35,8 @@ export default function Home() {
   const [err, setErr] = useState("");
   const [res, setRes] = useState(null);
   const [shared, setShared] = useState(false);
+  const [reporting, setReporting] = useState(false);
+  const [reportedId, setReportedId] = useState(null);
   const resRef = useRef(null);
   const { copy, show, ui } = useCopy();
   const mode = modeOf(platform);
@@ -115,6 +117,17 @@ export default function Home() {
     } finally { setDeepBusy(false); }
   }
 
+  async function report() {
+    if (!res) return;
+    setReporting(true); setErr("");
+    try {
+      const r = await fetch("/api/report", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id: res.case.id }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || t("eGeneric"));
+      setReportedId(res.case.id);
+    } catch (e) { setErr(e.message); } finally { setReporting(false); }
+  }
+
   function reset() { setUrl(""); setText(""); setImgs([]); setRes(null); setErr(""); setShowText(false); }
 
   const textBox = (mode === "msg" || showText || text) && (
@@ -179,8 +192,8 @@ export default function Home() {
         </section>
 
         <div ref={resRef} className="result-wrap">
-          {res && <ResultView c={res.case} links={res.links} onDeep={deep} deepBusy={deepBusy}
-            onCopy={() => copy(reportText(res.case, res.links, lang))} onCopyText={copy} />}
+          {res && <ResultView simple c={res.case} links={res.links} onDeep={deep} deepBusy={deepBusy}
+            onReport={report} reporting={reporting} reportedHere={reportedId === res.case.id} />}
         </div>
 
       </main>
