@@ -16,6 +16,7 @@ export default function Admin() {
   const { t, lang } = useLang();
   const [pw, setPw] = useState("");
   const [authed, setAuthed] = useState(false);
+  const [role, setRole] = useState(null);
   const [cases, setCases] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
@@ -36,7 +37,7 @@ export default function Admin() {
       const r = await fetch("/api/admin/cases", { headers: { "x-admin-password": p } });
       const j = await r.json();
       if (!r.ok) throw new Error(j.error || t("eLoad"));
-      setCases(j.cases); setAuthed(true);
+      setCases(j.cases); setRole(j.role || null); setAuthed(true);
       try { sessionStorage.setItem("radar-pw", p); } catch {}
     } catch (e) { setErr(e.message); setAuthed(false); } finally { setLoading(false); }
   }
@@ -50,7 +51,7 @@ export default function Admin() {
   async function deep(id) {
     setDeepId(id);
     try {
-      const r = await fetch("/api/deep", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ id }) });
+      const r = await fetch("/api/deep", { method: "POST", headers: { "content-type": "application/json", "x-admin-password": pw }, body: JSON.stringify({ id }) });
       const j = await r.json().catch(() => ({}));
       if (!r.ok) show(j.error || t("eDeep"));
       else setCases(cs => cs.map(c => (c.id === id ? j.case : c)));
@@ -92,6 +93,7 @@ export default function Admin() {
       <TopBar><button className="btn ghost sm" onClick={() => load()} disabled={loading}>{t("refresh")}</button></TopBar>
       <main className="wrap">
         <div className="page-head"><h1 className="h-page">{t("officer")}</h1><p className="note">{t("dashSub")}</p></div>
+        {role === "judge" && <div className="viewonly" role="status">{t("viewOnly")}</div>}
 
         <div className="stats">
           <div className="stat"><b>{t.n(cases.length)}</b><span>{t("stChecked")}</span></div>

@@ -105,6 +105,7 @@ h3 .pill{margin-inline-start:10px;vertical-align:middle;font-family:var(--f-b);f
 .pill.amber{background:var(--amber-w);border-color:#E6D2A4;color:var(--amber)}
 .pill.green{background:var(--green-w);border-color:#B9DCC8;color:var(--green)}
 .summary{margin:12px 0 0;font-size:16.5px}
+.viewonly{background:var(--amber-w,#FFF6E0);border:1px solid var(--amber,#E8A317);border-radius:8px;padding:10px 14px;margin:0 0 16px;font-size:14px}
 .linkwarn{background:var(--red-w);border-inline-start:3px solid var(--red);border-radius:8px;padding:10px 14px;margin-top:18px;color:#7A2219}
 .panel{border:1px solid var(--line2);background:#FAFBFC;border-radius:11px;padding:16px;margin-top:14px}
 .panel h3{font-size:14px;font-weight:600;text-transform:none;color:var(--ink);margin-bottom:10px}

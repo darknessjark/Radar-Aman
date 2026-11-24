@@ -11,7 +11,15 @@ export function fail(e) {
   console.error(e);
   return json({ error: "حدث خطأ أثناء التحليل، أعد المحاولة.", code: m.slice(0, 120) }, 500);
 }
-export function isAdmin(req) {
-  const p = process.env.ADMIN_PASSWORD;
-  return !!p && req.headers.get("x-admin-password") === p;
+// Officer access: "admin" can change things; "judge" (JUDGE_PASSWORD) can see everything but change nothing.
+export function role(req) {
+  const given = req.headers.get("x-admin-password");
+  const admin = process.env.ADMIN_PASSWORD, judge = process.env.JUDGE_PASSWORD;
+  if (!given) return null;
+  if (admin && given === admin) return "admin";
+  if (judge && given === judge) return "judge";
+  return null;
 }
+export const isAdmin = req => !!role(req);
+export const canWrite = req => role(req) === "admin";
+export const readOnly = () => json({ error: "حساب العرض للقراءة فقط: لا يمكن الحفظ أو الحذف أو النشر. | View-only access: saving, deleting and publishing are disabled." }, 403);

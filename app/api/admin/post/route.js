@@ -1,6 +1,6 @@
 import { getCase, saveCase, redis } from "@/lib/db";
 import { draftPost, igConnected, publishToInstagram, scrub, finalScore, POST_MIN, detectSensitive, cleanBoxes, cleanCrop } from "@/lib/post";
-import { json, fail, isAdmin } from "../../_util";
+import { json, fail, isAdmin, canWrite, readOnly } from "../../_util";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
@@ -25,6 +25,7 @@ export async function POST(req) {
     const body = await req.json();
     const body_reviewed = body.reviewed === true;
     const { id, action, caption, headline, points, image, boxes, crop, mode, detected } = body;
+    if (action !== "detect" && !canWrite(req)) return readOnly();
     const c = await getCase(id);
     if (!c) return json({ error: "الحالة غير موجودة" }, 404);
 

@@ -1,9 +1,10 @@
 import { getCase, saveCase, deleteCase } from "@/lib/db";
-import { json, fail, isAdmin } from "../../_util";
+import { json, fail, isAdmin, canWrite, readOnly } from "../../_util";
 export const runtime = "nodejs";
 const STATUSES = ["جديد", "قيد المراجعة", "تم طلب الحذف من المنصة", "محوّل للتحقيق", "آمن — لا إجراء"];
 export async function POST(req) {
   if (!isAdmin(req)) return json({ error: "كلمة السر غير صحيحة" }, 401);
+  if (!canWrite(req)) return readOnly();
   try {
     const { id, status, remove } = await req.json();
     const c = await getCase(id);
