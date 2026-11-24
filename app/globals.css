@@ -190,6 +190,7 @@ footer p{margin:0 0 4px}
 a.btn{text-decoration:none;display:inline-block}
 .libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .libitem{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.net.weak{border-style:dashed}
 .evd{max-width:900px}
 .evd-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-end;border-bottom:2px solid var(--ink);padding:18px 0 10px;margin:14px 0 6px}
 .evd-head h1{font-size:22px;margin:0 0 4px}.evd-meta{font-size:12px;color:var(--ink2);text-align:left}

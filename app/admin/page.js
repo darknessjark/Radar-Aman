@@ -4,7 +4,7 @@ import TopBar from "../components/TopBar";
 import ResultView from "../components/ResultView";
 import useCopy from "../components/useCopy";
 import { useLang } from "../components/Lang";
-import { networks, linkedTo } from "@/lib/networks";
+import { networks, linkedTo, infraLinks } from "@/lib/networks";
 import { reportText, riskColor, riskCls, verdictKey, fmtDate } from "@/lib/report";
 import Posts from "./Posts";
 import Library from "./Library";
@@ -60,6 +60,7 @@ export default function Admin() {
   }
 
   const nets = useMemo(() => networks(cases), [cases]);
+  const infra = useMemo(() => infraLinks(cases), [cases]);
   const list = useMemo(() => cases.filter(c => {
     const v = scoreOf(c);
     if (fRisk === "high" && v < 70) return false;
@@ -155,6 +156,20 @@ export default function Admin() {
                 <h4>{t("netN", { i: t.n(i + 1), n: t.n(n.members.length) })} <span className={`pill ${riskCls(max)}`}>{t("maxRisk", { n: t.n(max) })}</span></h4>
                 <div className="note" style={{ marginBottom: 6 }}>{t("common")}: {n.shared.map(keyLabel)}</div>
                 {n.members.map(m => <div className="member" key={m.id}><a href="#" onClick={e => { e.preventDefault(); setOpen(m.id); }}>{t.n(scoreOf(m))} · {t("p_" + platId(m.platform))} · {m.result?.scam_type}</a> <span className="note ltr">{fmtDate(m.createdAt)}</span></div>)}
+              </div>
+            );
+          })}
+        </>)}
+        {tab === "nets" && (<>
+          <h3 style={{ marginTop: 24 }}>{t("infT")}</h3>
+          <p className="note" style={{ marginTop: 0 }}>{t("infNote")}</p>
+          {!infra.length && <div className="empty">{t("infNone")}</div>}
+          {infra.map((g, i) => {
+            const [kind, v] = g.key.split("|");
+            return (
+              <div className="net weak" key={i}>
+                <h4>{kind === "خادم" ? t("infIp") : t("infNs")} <code className="ltr">{v}</code> <span className="pill">{t("infN", { n: g.members.length })}</span></h4>
+                {g.members.map(m => <div className="member" key={m.id}><a href="#" onClick={e => { e.preventDefault(); setOpen(m.id); }}>{t.n(scoreOf(m))} · {t("p_" + platId(m.platform))} · {m.result?.scam_type}</a> <span className="note ltr">{(m.result?.link_intel || []).map(l => l.finalDomain).filter(Boolean).join(", ")}</span></div>)}
               </div>
             );
           })}
