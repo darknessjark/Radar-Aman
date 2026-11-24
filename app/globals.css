@@ -190,6 +190,11 @@ footer p{margin:0 0 4px}
 a.btn{text-decoration:none;display:inline-block}
 .libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .libitem{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tbl-wrap{overflow-x:auto;margin-top:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table.tbl{width:100%;border-collapse:collapse;font-size:13px}
+table.tbl th{text-align:start;font-weight:600;color:var(--ink2);background:var(--paper);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.tbl td{padding:7px 10px;border-bottom:1px solid var(--line2);vertical-align:top}
+table.tbl td.ltr{display:table-cell;direction:ltr;text-align:left;word-break:break-all}
 .li-card .li-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .li-card .li-head b{display:inline-block!important}
 ol.li-chain{margin:6px 0;padding-inline-start:20px;font-size:12px;text-align:left}

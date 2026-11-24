@@ -2,7 +2,7 @@
 import { runScan } from "@/lib/scan";
 import { json, fail } from "../_util";
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 120;
 export async function POST(req) {
   const key = process.env.INGEST_KEY;
   if (!key || req.headers.get("x-ingest-key") !== key) return json({ error: "غير مصرح" }, 401);

@@ -8,6 +8,7 @@ import { networks, linkedTo } from "@/lib/networks";
 import { reportText, riskColor, riskCls, verdictKey, fmtDate } from "@/lib/report";
 import Posts from "./Posts";
 import Library from "./Library";
+import Batch from "./Batch";
 import { STATUSES, statusKey, PLATFORMS, platId, KEY_KIND } from "@/lib/i18n";
 
 const scoreOf = c => (c.deep?.status === "done" ? c.deep.score_after : c.result?.risk_score ?? 0);
@@ -106,6 +107,7 @@ export default function Admin() {
           <button role="tab" className={"tab" + (tab === "cases" ? " on" : "")} onClick={() => setTab("cases")}>{t("tabCases")}</button>
           <button role="tab" className={"tab" + (tab === "nets" ? " on" : "")} onClick={() => setTab("nets")}>{t("tabNets")}</button>
           <button role="tab" className={"tab" + (tab === "posts" ? " on" : "")} onClick={() => setTab("posts")}>{t("tabPosts")}</button>
+          <button role="tab" className={"tab" + (tab === "batch" ? " on" : "")} onClick={() => setTab("batch")}>{t("tabBatch")}</button>
           <button role="tab" className={"tab" + (tab === "lib" ? " on" : "")} onClick={() => setTab("lib")}>{t("tabLib")}</button>
         </div>
 
@@ -159,6 +161,7 @@ export default function Admin() {
         </>)}
         {tab === "posts" && <Posts cases={cases} pw={pw} show={show} onCase={nc => setCases(cs => cs.map(c => (c.id === nc.id ? nc : c)))} />}
         {tab === "lib" && <Library pw={pw} show={show} />}
+        {tab === "batch" && <Batch pw={pw} show={show} />}
       </main>
 
       {openCase && (
