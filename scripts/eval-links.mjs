@@ -23,10 +23,22 @@ if (fs.existsSync("eval/results")) for (const f of fs.readdirSync("eval/results"
 }
 const defang = u => String(u).replace(/^http/i, "hxxp").replace(/\./g, "[.]");
 
+// Sources: OpenPhish community feed, then the Phishing.Database list of links first seen today (github.com/mitchellkrogza/Phishing.Database).
+const SOURCES = [["OpenPhish", "https://openphish.com/feed.txt"], ["Phishing.Database (new today)", "https://raw.githubusercontent.com/mitchellkrogza/Phishing.Database/master/phishing-links-NEW-today.txt"]];
+const used = [];
 async function phishSample() {
-  const r = await fetch("https://openphish.com/feed.txt", { signal: AbortSignal.timeout(30000) });
-  if (!r.ok) throw new Error("OpenPhish feed " + r.status);
-  const all = (await r.text()).split(/\r?\n/).map(s => s.trim()).filter(s => /^https?:\/\//.test(s));
+  let all = [];
+  for (const [name, url] of SOURCES) {
+    try {
+      const r = await fetch(url, { signal: AbortSignal.timeout(30000) });
+      if (!r.ok) { console.log(name, r.status); continue; }
+      const list = (await r.text()).split(/\r?\n/).map(s => s.trim()).filter(s => /^https?:\/\//.test(s));
+      used.push(`${name} (${list.length} links)`);
+      all.push(...list.map(u => [name, u]));
+    } catch (e) { console.log(name, String(e)); }
+  }
+  const src = new Map(all.map(([n, u]) => [u, n]));
+  all = all.map(([, u]) => u);
   const seen = new Set(), out = [];
   // Deterministic shuffle by date so a run can be repeated the same day.
   const seed = new Date().toISOString().slice(0, 10);
@@ -36,12 +48,12 @@ async function phishSample() {
     if (seen.has(reg) || previous.has(reg)) continue; seen.add(reg); out.push(u);
     if (out.length >= N_PHISH) break;
   }
-  return { urls: out, feedSize: all.length };
+  return { urls: out, feedSize: all.length, bySource: out.reduce((m, u) => ((m[src.get(u)] = (m[src.get(u)] || 0) + 1), m), {}) };
 }
 // Fresh legitimate sites nobody picked by hand: a date-seeded sample of the Tranco top 20,000 (research ranking of popular domains).
 function trancoSample(known) {
   if (!TRANCO || !fs.existsSync(TRANCO)) return [];
-  const seed = new Date().toISOString().slice(0, 10) + "tranco";
+  const seed = new Date().toISOString().slice(0, 10) + "tranco" + TAG;
   const h = s => { let x = 0; for (const c of seed + s) x = (x * 31 + c.charCodeAt(0)) >>> 0; return x; };
   const top = fs.readFileSync(TRANCO, "utf8").split(/\r?\n/).slice(0, 20000).map(l => l.split(",")[1]).filter(Boolean)
     .filter(d => !known.has(registrable(d)) && !previous.has(registrable(d)));
@@ -58,7 +70,7 @@ async function pool(items, fn, n) {
 }
 const timed = u => Promise.race([inspect(u), new Promise(r => setTimeout(() => r({ input: u, error: "timeout", flags: [], score: null }), PER))]);
 
-const { urls: phish, feedSize } = await phishSample();
+const { urls: phish, feedSize, bySource } = await phishSample();
 const legit = legitList();
 const known = new Set(legit.map(u => { try { return registrable(new URL(u).hostname); } catch { return ""; } }));
 const tranco = trancoSample(known);
@@ -92,7 +104,7 @@ const md = `# Link check accuracy — ${day}
 Run of \`scripts/eval-links.mjs\` (the same \`inspect()\` the app uses). Took ${Math.round((Date.now() - t0) / 1000)} s.
 
 **Data**
-- Phishing: ${P.length} links from the public OpenPhish community feed on ${day} (${feedSize} links in the feed; one per registrable domain). ${reached.length} were still online when checked, ${dead.length} were already down or unreachable.
+- Phishing: ${P.length} links (${Object.entries(bySource).map(([k, v]) => `${v} from ${k}`).join(", ")}), one per registrable domain, out of ${feedSize} links in ${used.join(" and ")} on ${day}. ${reached.length} were still online when checked, ${dead.length} were already down or unreachable.
 - Legitimate: ${L.length} sites. ${off.length} are on the official UAE list (government, banks, utilities, telcos, airlines, couriers); ${nonOff.length} are other real sites picked by hand, including shops, news and login pages (\`eval/legit-extra.txt\`); ${tr.length} are a random sample of the Tranco top 20,000 that nobody picked by hand.${previous.size ? `\n- ${previous.size} phishing domains used in earlier runs were left out, so this run is on links the code was not changed for.` : ""}
 
 **Results** (a link is "flagged" when its link score reaches the threshold)
@@ -112,7 +124,7 @@ False alarms (score 30+): official UAE sites ${off.filter(x => sc(x) >= 30).leng
 **How often each signal fired on phishing links**: new domain (<30 days) ${signal(/only \d+ days old/)}, free hosting platform ${signal(/free hosting/)}, page asks for card/password/code ${signal(/asks for/)}, copies a known brand ${signal(/uses the name/)}, redirect or short link ${signal(/sends you to|Short link/)}, brand inside the domain name ${signal(/site name contains/)}, look-alike or risky name ${signal(/Resembles|ending is common|hyphens|Payment, verification|raw IP|Punycode|gov/)}. Domain age found for ${P.filter(x => x.r.whois?.ageDays != null).length} of ${P.length} phishing links.
 
 ${fpRows.length ? "**Legitimate sites flagged (score 30+)**\n\n" + fpRows.map(x => `- ${x.u} — ${sc(x)}: ${(x.r.flags || []).filter(f => f.pts > 0).map(f => f.e).join("; ")}`).join("\n") + "\n" : "No legitimate site reached a score of 30.\n"}
-**Limits.** OpenPhish is global phishing (mostly fake login pages for big brands), not UAE scam ads, so this measures the link layer only. The AI reading of ad text and screenshots is not part of this number. Phishing pages die fast; links already down can only be judged by name, age and hosting. The legitimate set was chosen by hand. ${TAG ? "This run follows code changes made after looking at earlier runs; its phishing links are new (earlier domains were excluded), and the Tranco sample is new too." : "Rules were written before this run and were not tuned on it."}
+**Limits.** These feeds are global phishing (mostly fake login pages for big brands), not UAE scam ads, so this measures the link layer only. The AI reading of ad text and screenshots is not part of this number. Phishing pages die fast; links already down can only be judged by name, age and hosting. The legitimate set was chosen by hand. ${TAG ? "This run follows code changes made after looking at earlier runs; its phishing links are new (earlier domains were excluded), and the Tranco sample is new too." : "Rules were written before this run and were not tuned on it."}
 `;
 fs.mkdirSync("eval/results", { recursive: true });
 fs.writeFileSync(`eval/results/${day}.md`, md);

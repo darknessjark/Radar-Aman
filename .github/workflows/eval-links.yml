@@ -7,7 +7,7 @@ on:
         default: "100"
       tag:
         description: Label for the results file (e.g. v2)
-        default: "v2"
+        default: "v3"
   push:
     branches: [feature/link-intel]
     paths: [eval/**, scripts/eval-links.mjs, .github/workflows/eval-links.yml]
@@ -25,7 +25,7 @@ jobs:
       - name: Download Tranco top list
         run: curl -sSL -o tranco.zip https://tranco-list.eu/top-1m.csv.zip && unzip -o -q tranco.zip && ls -la top-1m.csv || echo "Tranco unavailable"
       - name: Run evaluation
-        run: node --import ./scripts/resolve-hook.mjs scripts/eval-links.mjs --phish "${{ github.event.inputs.phish || '100' }}" --tag "${{ github.event.inputs.tag || 'v2' }}" --tranco top-1m.csv --tranco-n 100
+        run: node --import ./scripts/resolve-hook.mjs scripts/eval-links.mjs --phish "${{ github.event.inputs.phish || '100' }}" --tag "${{ github.event.inputs.tag || 'v3' }}" --tranco top-1m.csv --tranco-n 100
       - name: Save results to the branch
         run: |
           git config user.name "github-actions[bot]"
