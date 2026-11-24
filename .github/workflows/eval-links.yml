@@ -1,0 +1,30 @@
+name: Link check accuracy
+on:
+  workflow_dispatch:
+    inputs:
+      phish:
+        description: Number of phishing links to sample
+        default: "100"
+  push:
+    branches: [feature/link-intel]
+    paths: [eval/**, scripts/eval-links.mjs, .github/workflows/eval-links.yml]
+permissions:
+  contents: write
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run evaluation
+        run: node --import ./scripts/resolve-hook.mjs scripts/eval-links.mjs --phish "${{ github.event.inputs.phish || '100' }}"
+      - name: Save results to the branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eval/results
+          git commit -m "Link check accuracy results $(date -u +%F)" || exit 0
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"
