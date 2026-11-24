@@ -169,7 +169,7 @@ export default function Admin() {
           <ResultView c={openCase} links={linkedTo(openCase, cases).map(l => ({ id: l.o.id, shared: l.shared }))}
             onDeep={() => deep(openCase.id)} deepBusy={deepId === openCase.id}
             onCopy={() => copy(rep(openCase))} onCopyText={copy}
-            extra={<button className="btn ghost" onClick={() => setOpen(null)}>{t("close")}</button>} />
+            extra={<><a className="btn ghost" href={`/admin/evidence?id=${openCase.id}`} target="_blank" rel="noopener">{t("evFile")}</a><button className="btn ghost" onClick={() => setOpen(null)}>{t("close")}</button></>} />
         </div>
       )}
       {ui}
