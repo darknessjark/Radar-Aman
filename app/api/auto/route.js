@@ -4,7 +4,7 @@ import { runScan } from "@/lib/scan";
 import { redis, allowToday } from "@/lib/db";
 import { json, fail } from "../_util";
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 120;
 
 const authed = (given) => { const key = process.env.AUTO_KEY; return !!key && given === key; };
 

@@ -3,6 +3,7 @@ import { riskColor, riskCls, verdictKey, fmtDate, evidenceList, platformReport }
 import { AREA_KEYS, KEY_KIND, TACTIC_EN, platId } from "@/lib/i18n";
 import { useLang } from "./Lang";
 import Dial from "./Dial";
+import LinkIntel from "./LinkIntel";
 
 const LC = { red: "var(--red)", amber: "var(--amber)", green: "var(--green)", none: "var(--line)" };
 const ENT = ["phones", "ibans", "domains", "urls", "accounts", "emails"];
@@ -56,7 +57,9 @@ function Kit({ c, t, onCopy }) {
 function Details({ c, t, lang, officer }) {
   const r = c.result || {}, p = r.price_analysis || {};
   const gap = Math.max(0, Math.min(100, Math.round(+p.gap_percent || 0)));
-  const lc = r.link_check || [];
+  const li = r.link_intel || [];
+  const opened = new Set(li.flatMap(l => [l.domain, l.finalDomain]).filter(Boolean));
+  const lc = (r.link_check || []).filter(l => !opened.has(l.domain));
   const ents = ENT.filter(k => (r.entities?.[k] || []).length);
   return (<>
       {p.advertised && p.market_estimate && (
@@ -79,6 +82,7 @@ function Details({ c, t, lang, officer }) {
         </div>
       )}
 
+      <LinkIntel list={li} />
       {lc.length > 0 && (
         <section className="panel">
           <h3>{t("linkT")}</h3>

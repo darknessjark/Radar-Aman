@@ -190,6 +190,15 @@ footer p{margin:0 0 4px}
 a.btn{text-decoration:none;display:inline-block}
 .libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
 .libitem{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.li-card .li-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.li-card .li-head b{display:inline-block!important}
+ol.li-chain{margin:6px 0;padding-inline-start:20px;font-size:12px;text-align:left}
+ol.li-chain code{font-size:11.5px;word-break:break-all}
+dl.li-facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:4px 14px;margin:8px 0}
+dl.li-facts dt{font-size:11.5px;color:var(--muted)}dl.li-facts dd{margin:0;font-size:13px;word-break:break-word}
+ul.li-flags{list-style:none;padding:0;margin:6px 0 0}
+ul.li-flags li{font-size:13px;padding:3px 8px;border-radius:6px;margin-bottom:3px;background:var(--paper)}
+ul.li-flags li.red{background:var(--red-w);color:var(--red)}ul.li-flags li.amber{background:var(--amber-w);color:var(--amber)}ul.li-flags li.green{background:var(--green-w);color:var(--green)}
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;gap:28px;padding:32px 0 24px}
   .rings{width:320px;height:320px;inset-inline-start:-80px}

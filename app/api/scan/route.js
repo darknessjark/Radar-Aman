@@ -1,7 +1,7 @@
 import { runScan, publicView } from "@/lib/scan";
 import { json, fail } from "../_util";
 export const runtime = "nodejs";
-export const maxDuration = 60;
+export const maxDuration = 120;
 export async function POST(req) {
   try {
     const body = await req.json();
