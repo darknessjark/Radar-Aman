@@ -35,7 +35,7 @@ async function phishSample() {
       if (!r.ok) { console.log(name, r.status); continue; }
       const list = (await r.text()).split(/\r?\n/).map(s => s.trim()).filter(s => /^https?:\/\//.test(s));
       used.push(`${name} (${list.length} links)`);
-      all.push(...list.map(u => [name, u]));
+      for (const u of list) all.push([name, u]); // (no spread: the active list has ~800k lines)
     } catch (e) { console.log(name, String(e)); }
   }
   const src = new Map(all.map(([n, u]) => [u, n]));
@@ -44,7 +44,8 @@ async function phishSample() {
   // Deterministic shuffle by date so a run can be repeated the same day.
   const seed = new Date().toISOString().slice(0, 10);
   const h = s => { let x = 0; for (const c of seed + s) x = (x * 31 + c.charCodeAt(0)) >>> 0; return x; };
-  for (const u of all.sort((a, b) => h(a) - h(b))) {
+  const keyed = all.map(u => [h(u), u]).sort((a, b) => a[0] - b[0]);
+  for (const [, u] of keyed) {
     let reg; try { reg = registrable(new URL(u).hostname); } catch { continue; }
     if (seen.has(reg) || previous.has(reg)) continue; seen.add(reg); out.push(u);
     if (out.length >= N_PHISH) break;
