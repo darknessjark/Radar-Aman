@@ -24,13 +24,14 @@ if (fs.existsSync("eval/results")) for (const f of fs.readdirSync("eval/results"
 const defang = u => String(u).replace(/^http/i, "hxxp").replace(/\./g, "[.]");
 
 // Sources: OpenPhish community feed, then the Phishing.Database list of links first seen today (github.com/mitchellkrogza/Phishing.Database).
-const SOURCES = [["OpenPhish", "https://openphish.com/feed.txt"], ["Phishing.Database (new today)", "https://raw.githubusercontent.com/mitchellkrogza/Phishing.Database/master/phishing-links-NEW-today.txt"]];
+const SOURCES = [["OpenPhish", "https://openphish.com/feed.txt"], ["Phishing.Database (new today)", "https://raw.githubusercontent.com/mitchellkrogza/Phishing.Database/master/phishing-links-NEW-today.txt"],
+  ["Phishing.Database (active)", "https://raw.githubusercontent.com/mitchellkrogza/Phishing.Database/master/phishing-links-ACTIVE.txt"]];
 const used = [];
 async function phishSample() {
   let all = [];
   for (const [name, url] of SOURCES) {
     try {
-      const r = await fetch(url, { signal: AbortSignal.timeout(30000) });
+      const r = await fetch(url, { signal: AbortSignal.timeout(90000) });
       if (!r.ok) { console.log(name, r.status); continue; }
       const list = (await r.text()).split(/\r?\n/).map(s => s.trim()).filter(s => /^https?:\/\//.test(s));
       used.push(`${name} (${list.length} links)`);
