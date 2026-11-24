@@ -9,6 +9,7 @@ import { reportText, riskColor, riskCls, verdictKey, fmtDate } from "@/lib/repor
 import Posts from "./Posts";
 import Library from "./Library";
 import Batch from "./Batch";
+import NewDomains from "./NewDomains";
 import { STATUSES, statusKey, PLATFORMS, platId, KEY_KIND } from "@/lib/i18n";
 
 const scoreOf = c => (c.deep?.status === "done" ? c.deep.score_after : c.result?.risk_score ?? 0);
@@ -109,6 +110,7 @@ export default function Admin() {
           <button role="tab" className={"tab" + (tab === "nets" ? " on" : "")} onClick={() => setTab("nets")}>{t("tabNets")}</button>
           <button role="tab" className={"tab" + (tab === "posts" ? " on" : "")} onClick={() => setTab("posts")}>{t("tabPosts")}</button>
           <button role="tab" className={"tab" + (tab === "batch" ? " on" : "")} onClick={() => setTab("batch")}>{t("tabBatch")}</button>
+          <button role="tab" className={"tab" + (tab === "nrd" ? " on" : "")} onClick={() => setTab("nrd")}>{t("tabNrd")}</button>
           <button role="tab" className={"tab" + (tab === "lib" ? " on" : "")} onClick={() => setTab("lib")}>{t("tabLib")}</button>
         </div>
 
@@ -177,6 +179,7 @@ export default function Admin() {
         {tab === "posts" && <Posts cases={cases} pw={pw} show={show} onCase={nc => setCases(cs => cs.map(c => (c.id === nc.id ? nc : c)))} />}
         {tab === "lib" && <Library pw={pw} show={show} />}
         {tab === "batch" && <Batch pw={pw} show={show} />}
+        {tab === "nrd" && <NewDomains pw={pw} show={show} canWrite={role === "admin"} />}
       </main>
 
       {openCase && (
