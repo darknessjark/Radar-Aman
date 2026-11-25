@@ -39,8 +39,7 @@ export default function Evidence() {
     let p = null; try { p = sessionStorage.getItem("radar-pw"); } catch {}
     const i = new URLSearchParams(location.search).get("id");
     setPw(p); setId(i);
-    if (!p) { setErr(t("evLogin")); return; }
-    fetch(`/api/admin/evidence?id=${encodeURIComponent(i || "")}`, { headers: { "x-admin-password": p } })
+    fetch(`/api/admin/evidence?id=${encodeURIComponent(i || "")}`, { headers: p ? { "x-admin-password": p } : {} })
       .then(async r => { const j = await r.json(); if (!r.ok) throw new Error(j.error || t("eLoad")); setData(j); })
       .catch(e => setErr(e.message));
   }, []);
@@ -48,7 +47,7 @@ export default function Evidence() {
   async function capture() {
     setBusy(true); setErr("");
     try {
-      const r = await fetch("/api/admin/evidence", { method: "POST", headers: { "content-type": "application/json", "x-admin-password": pw }, body: JSON.stringify({ id }) });
+      const r = await fetch("/api/admin/evidence", { method: "POST", headers: { "content-type": "application/json", ...(pw ? { "x-admin-password": pw } : {}) }, body: JSON.stringify({ id }) });
       const j = await r.json();
       if (!r.ok) throw new Error(j.error || t("eLoad"));
       setData(j);

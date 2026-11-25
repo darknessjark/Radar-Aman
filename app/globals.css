@@ -203,6 +203,8 @@ pre.evd-text{white-space:pre-wrap;font-family:inherit;font-size:13.5px;backgroun
 .evd-abuse{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
 .evd-foot{padding:12px 0 30px}
 @media print{.no-print,.top{display:none!important}body{background:#fff}.wrap{padding:0}.evd-sec,.li-card{break-inside:avoid}a{color:inherit}}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:18px 0 12px}.or:before,.or:after{content:"";flex:1;border-top:1px solid var(--line)}
+.btn.uaepass{display:flex;justify-content:center;background:#000;border-color:#000;color:#fff;text-decoration:none}.btn.uaepass:hover{background:#222}
 label.chk{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;margin:0;cursor:pointer}label.chk input{width:auto;margin:0}
 .tbl-wrap{overflow-x:auto;margin-top:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 table.tbl{width:100%;border-collapse:collapse;font-size:13px}

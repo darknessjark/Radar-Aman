@@ -31,7 +31,19 @@ export default function Admin() {
   const [armed, setArmed] = useState(null);
   const { copy, show, ui } = useCopy();
 
-  useEffect(() => { try { const s = sessionStorage.getItem("radar-pw"); if (s) { setPw(s); load(s); } } catch {} }, []);
+  const [me, setMe] = useState(null);
+  const [upMsg, setUpMsg] = useState(null);
+  useEffect(() => {
+    const q = new URLSearchParams(location.search);
+    if (q.get("uaepass")) { setUpMsg({ k: q.get("uaepass"), id: q.get("id") }); history.replaceState(null, "", "/admin"); }
+    fetch("/api/auth/me").then(r => r.json()).then(j => { setMe(j); if (j.session) load(""); }).catch(() => {});
+    try { const s = sessionStorage.getItem("radar-pw"); if (s) { setPw(s); load(s); } } catch {}
+  }, []);
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    try { sessionStorage.removeItem("radar-pw"); } catch {}
+    setPw(""); setAuthed(false); setCases([]); setMe(m => ({ ...m, session: null }));
+  }
 
   async function load(p = pw) {
     setLoading(true); setErr("");
@@ -40,7 +52,7 @@ export default function Admin() {
       const j = await r.json();
       if (!r.ok) throw new Error(j.error || t("eLoad"));
       setCases(j.cases); setRole(j.role || null); setAuthed(true);
-      try { sessionStorage.setItem("radar-pw", p); } catch {}
+      if (p) try { sessionStorage.setItem("radar-pw", p); } catch {}
     } catch (e) { setErr(e.message); setAuthed(false); } finally { setLoading(false); }
   }
   async function update(id, body) {
@@ -85,7 +97,11 @@ export default function Admin() {
           <div className="field"><label htmlFor="pw">{t("pw")}</label>
             <input id="pw" type="password" value={pw} onChange={e => setPw(e.target.value)} onKeyDown={e => e.key === "Enter" && load()} /></div>
           <div className="row"><button className="btn" onClick={() => load()} disabled={loading || !pw}>{loading ? t("entering") : t("enter")}</button><a href="/" className="note">{t("back")}</a></div>
-          {err && <div className="err" role="alert">{err}</div>}
+          {err && !upMsg && <div className="err" role="alert">{err}</div>}
+          <div className="or"><span>{t("or")}</span></div>
+          <a className="btn uaepass" href={`/api/auth/uaepass/login?lang=${lang}`}>{t("upBtn")}</a>
+          {me?.uaepass?.env !== "production" && <p className="note" style={{ marginBottom: 0 }}>{t("upStaging")}</p>}
+          {upMsg && <div className={upMsg.k === "ok" ? "note" : "err"} role="alert">{t("up_" + upMsg.k)}{upMsg.id ? <><br /><code className="ltr">{upMsg.id}</code></> : null}</div>}
         </div>
       </main>
     </>
@@ -93,7 +109,11 @@ export default function Admin() {
 
   return (
     <>
-      <TopBar><button className="btn ghost sm" onClick={() => load()} disabled={loading}>{t("refresh")}</button></TopBar>
+      <TopBar>
+        {me?.session && <span className="note">{me.session.name} · UAE PASS{me.session.env === "staging" ? " (staging)" : ""}</span>}
+        <button className="btn ghost sm" onClick={() => load()} disabled={loading}>{t("refresh")}</button>
+        <button className="btn ghost sm" onClick={logout}>{t("logout")}</button>
+      </TopBar>
       <main className="wrap">
         <div className="page-head"><h1 className="h-page">{t("officer")}</h1><p className="note">{t("dashSub")}</p></div>
         {role === "judge" && <div className="viewonly" role="status">{t("viewOnly")}</div>}
