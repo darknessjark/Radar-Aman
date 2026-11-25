@@ -192,6 +192,7 @@ export default function Home() {
           </div>
         </section>
 
+        <p className="note" style={{ textAlign: "center", marginTop: 10 }}><a href="/accuracy">{t("acLink")}</a></p>
         <div ref={resRef} className="result-wrap">
           {res && <ResultView simple c={res.case} links={res.links} onDeep={deep} deepBusy={deepBusy}
             onReport={report} reporting={reporting} reportedHere={reportedId === res.case.id} />}
