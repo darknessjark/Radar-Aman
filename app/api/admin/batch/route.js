@@ -11,7 +11,7 @@ const PER_REQUEST = 10;
 export async function POST(req) {
   if (!isAdmin(req)) return json({ error: "كلمة السر غير صحيحة" }, 401);
   try {
-    const { urls, ai } = await req.json();
+    const { urls, ai } = (await req.json().catch(() => null)) || {};
     const list = [...new Set((Array.isArray(urls) ? urls : []).map(u => String(u || "").trim()).filter(Boolean))].slice(0, PER_REQUEST);
     if (!list.length) return json({ error: "لا توجد روابط" }, 400);
     const limit = +process.env.DAILY_BATCH_LIMIT || 1000;

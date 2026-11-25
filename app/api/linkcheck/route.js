@@ -3,11 +3,11 @@
 import { checkLink } from "@/lib/threatintel";
 import { aiLink, finalVerdict } from "@/lib/linkai";
 import { allowToday } from "@/lib/db";
-import { json, fail } from "../_util";
+import { json, fail, safeEq } from "../_util";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
-const authed = given => { const key = process.env.AUTO_KEY; return !!key && given === key; };
+const authed = given => { const key = process.env.AUTO_KEY; return !!key && !!given && safeEq(given, key); };
 const timed = u => Promise.race([checkLink(u), new Promise(r => setTimeout(() => r({ input: u, checkedAt: new Date().toISOString(), error: "انتهت مهلة الفحص", flags: [], score: null }), 20000))]);
 async function run(urls, ai = false) {
   const list = [...new Set(urls.map(u => String(u || "").trim()).filter(Boolean))].slice(0, 10);
@@ -26,5 +26,5 @@ export async function GET(req) {
 }
 export async function POST(req) {
   if (!authed(req.headers.get("x-auto-key"))) return json({ error: "غير مصرح" }, 401);
-  try { const { urls, ai } = await req.json(); return await run(Array.isArray(urls) ? urls : [], !!ai); } catch (e) { return fail(e); }
+  try { const { urls, ai } = (await req.json().catch(() => null)) || {}; return await run(Array.isArray(urls) ? urls : [], !!ai); } catch (e) { return fail(e); }
 }

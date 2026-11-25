@@ -17,7 +17,7 @@ export async function GET(req) {
     try { await redis().lpush("audit", JSON.stringify({ at: new Date().toISOString(), event: role ? "login" : "login-denied", via: UP().prod ? "uaepass" : "uaepass-staging", who, id: info.uuid || info.sub || null, role })); await redis().ltrim("audit", 0, 999); } catch {}
     if (!role) return back({ uaepass: "denied", id: info.uuid || info.sub || ids(info)[0] || "" });
     const res = back({ uaepass: "ok" });
-    res.cookies.set(COOKIE, makeSession({ role, name: who, sub: info.uuid || info.sub || null, userType: info.userType || null, via: "uaepass", env: UP().prod ? "production" : "staging" }), cookieOpts());
+    res.cookies.set(COOKIE, makeSession({ role, name: who, sub: info.uuid || info.sub || null, userType: info.userType || null, email: info.email || null, mobile: info.mobile || null, idn: info.idn || null, via: "uaepass", env: UP().prod ? "production" : "staging" }), cookieOpts());
     return res;
   } catch (e) {
     console.error("uaepass", String(e?.message || e));
