@@ -8,6 +8,25 @@ import { riskCls } from "@/lib/report";
 const dubai = s => { try { return new Date(s).toLocaleString("en-GB", { timeZone: "Asia/Dubai", dateStyle: "medium", timeStyle: "medium" }) + " (Dubai)"; } catch { return s; } };
 const ENT = ["phones", "ibans", "domains", "urls", "accounts", "emails"];
 
+// Ready-to-send takedown request for the registrar or hosting provider (opens the officer's mail app; nothing is sent automatically).
+function takedown(b, e) {
+  const l = e.intel || {}, s = e.screenshot || {};
+  const reasons = (l.flags || []).filter(f => f.level === "red" || f.level === "amber").slice(0, 5).map(f => "- " + (f.e || f.t));
+  const body = [
+    "Hello,", "",
+    "We are reporting a fraudulent website targeting residents of the United Arab Emirates and request that it be suspended.", "",
+    `URL reported: ${e.url}`, l.finalUrl && l.finalUrl !== e.url ? `Lands on: ${l.finalUrl}` : "", `Domain: ${l.finalDomain || l.domain}`,
+    l.hosting?.ip ? `IP address: ${l.hosting.ip}${l.hosting.org ? " (" + l.hosting.org + ")" : ""}` : "",
+    `First seen: ${b.first_seen} UTC. Captured: ${e.at} UTC.`, "",
+    "Why it is fraudulent:", ...reasons, b.assessment?.summary ? "- " + b.assessment.summary : "", "",
+    s.report ? `Independent scan: ${s.report}` : "", s.sha256 ? `Screenshot SHA-256: ${s.sha256}` : "", `Evidence record SHA-256: ${e.sha256}`, `Case reference: ${b.case_id}`, "",
+    "Thank you."
+  ].filter((x, i, a) => x !== "" || a[i - 1] !== "").join("\n");
+  const subject = `Abuse report: fraudulent website ${l.finalDomain || l.domain}`;
+  const to = [e.abuse?.registrarEmail, e.abuse?.host?.email].filter(Boolean);
+  return { to, subject, body, href: `mailto:${to.join(",")}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
+}
+
 export default function Evidence() {
   const { t } = useLang();
   const [pw, setPw] = useState(null);
@@ -101,6 +120,15 @@ export default function Evidence() {
                 <ul className="flags" style={{ flex: 1 }}><LinkCard l={e.intel} /></ul>
               </div>
               <div className="evid">record SHA-256 {e.sha256}</div>
+              {(() => { const td = takedown(b, e); return (
+                <div className="evd-abuse">
+                  <b>{t("evAbuse")}</b>{" "}
+                  <span className="note ltr">{[e.abuse?.registrar && `${e.abuse.registrar}${e.abuse.registrarEmail ? " <" + e.abuse.registrarEmail + ">" : ""}`, e.abuse?.host?.email && `${e.abuse.host.network || "host"} <${e.abuse.host.email}>`].filter(Boolean).join(" · ") || t("evAbuseNone")}</span>
+                  <div className="row no-print" style={{ marginTop: 6 }}>
+                    <a className="btn ghost sm" href={td.href}>{t("evAbuseMail")}</a>
+                    <button className="btn ghost sm" onClick={() => navigator.clipboard?.writeText(td.subject + "\n\n" + td.body)}>{t("evAbuseCopy")}</button>
+                  </div>
+                </div>); })()}
             </div>
           );
         })}

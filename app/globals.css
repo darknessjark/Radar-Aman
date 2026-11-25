@@ -200,8 +200,10 @@ pre.evd-text{white-space:pre-wrap;font-family:inherit;font-size:13.5px;backgroun
 .evd-cap{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px;break-inside:avoid}
 .evd-cap-head{font-size:13px;margin-bottom:6px}.evd-cap-body{display:flex;gap:12px;flex-wrap:wrap}
 .evd-shot{width:220px;flex:none}.evd-shot img{width:100%;border:1px solid var(--line);border-radius:6px}
+.evd-abuse{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px}
 .evd-foot{padding:12px 0 30px}
 @media print{.no-print,.top{display:none!important}body{background:#fff}.wrap{padding:0}.evd-sec,.li-card{break-inside:avoid}a{color:inherit}}
+label.chk{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;margin:0;cursor:pointer}label.chk input{width:auto;margin:0}
 .tbl-wrap{overflow-x:auto;margin-top:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 table.tbl{width:100%;border-collapse:collapse;font-size:13px}
 table.tbl th{text-align:start;font-weight:600;color:var(--ink2);background:var(--paper);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -213,6 +215,8 @@ ol.li-chain{margin:6px 0;padding-inline-start:20px;font-size:12px;text-align:lef
 ol.li-chain code{font-size:11.5px;word-break:break-all}
 dl.li-facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:4px 14px;margin:8px 0}
 dl.li-facts dt{font-size:11.5px;color:var(--muted)}dl.li-facts dd{margin:0;font-size:13px;word-break:break-word}
+ul.li-flags li .pts{float:inline-end;font-family:var(--f-m);font-size:11.5px;opacity:.8;margin-inline-start:8px}
+.li-ai{font-size:13px;margin:6px 0;background:var(--teal-w);padding:6px 8px;border-radius:6px}
 ul.li-flags{list-style:none;padding:0;margin:6px 0 0}
 ul.li-flags li{font-size:13px;padding:3px 8px;border-radius:6px;margin-bottom:3px;background:var(--paper)}
 ul.li-flags li.red{background:var(--red-w);color:var(--red)}ul.li-flags li.amber{background:var(--amber-w);color:var(--amber)}ul.li-flags li.green{background:var(--green-w);color:var(--green)}

@@ -17,6 +17,8 @@ export function LinkCard({ l }) {
     [t("li_host"), h ? [h.org, h.country, h.ip].filter(Boolean).join(" · ") : null],
     [t("li_tls"), c ? `${c.issuer || "?"} · ${day(c.validFrom)}${c.trusted ? "" : " · " + t("li_untrusted")}` : null],
     [t("li_title"), p?.title],
+    [t("li_threat"), l.threat ? (l.listed ? t("li_listed") : [t("li_feedsOk"), l.threat.sbEnabled ? "Google Safe Browsing ✓" : null].filter(Boolean).join(" · ")) : null],
+    [t("li_cloak"), l.cloak ? (l.cloak.differs ? t("li_cloakYes") : t("li_cloakNo")) : null],
     [t("li_asks"), p ? [p.hasCard && t("li_card"), p.hasPassword && t("li_pass"), p.hasOtp && t("li_otp")].filter(Boolean).join("، ") || t("li_nothing") : null],
   ].filter(([, v]) => v);
   const lv = l.level || "none";
@@ -30,8 +32,9 @@ export function LinkCard({ l }) {
         <ol className="li-chain ltr">{l.chain.map((x, i) => <li key={i}><code>{x.url.replace(/^https?:\/\//, "").slice(0, 70)}</code> <span className="note">{x.status || x.error || ""}{x.soft ? " (page)" : ""}</span></li>)}</ol>
       )}
       {facts.length > 0 && <dl className="li-facts">{facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd dir="auto">{v}</dd></div>)}</dl>}
+      {l.ai && <p className="li-ai" dir="auto"><b>{t("li_aiT")} {l.ai.score}:</b> {lang === "en" ? l.ai.reason_en : l.ai.reason_ar}</p>}
       {(l.flags || []).filter(f => f.level !== "none").length > 0 && (
-        <ul className="li-flags">{l.flags.filter(f => f.level !== "none").map((f, i) => <li key={i} className={f.level}>{lang === "en" ? f.e : f.t}</li>)}</ul>
+        <ul className="li-flags">{l.flags.filter(f => f.level !== "none").map((f, i) => <li key={i} className={f.level}>{lang === "en" ? f.e : f.t}{f.pts ? <span className="pts ltr">{f.pts > 0 ? "+" : ""}{f.pts}</span> : null}</li>)}</ul>
       )}
       <div className="note ltr" style={{ marginTop: 4 }}>{t("li_checked")} {fmtDate(l.checkedAt)}</div>
     </li>
