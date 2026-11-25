@@ -9,6 +9,8 @@
 import fs from "node:fs";
 import { inspect, registrable } from "../lib/linkintel.js";
 import { OFFICIAL_DOMAINS } from "../lib/official.js";
+import { safeBrowsing } from "../lib/threatintel.js";
+import { aiLink, finalVerdict } from "../lib/linkai.js";
 
 const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const N_PHISH = +arg("--phish", 100), CONC = +arg("--conc", 8), PER = 25000;
@@ -70,7 +72,15 @@ async function pool(items, fn, n) {
   await Promise.all(Array.from({ length: n }, async () => { while (i < items.length) { const k = i++; out[k] = await fn(items[k], k); } }));
   return out;
 }
-const timed = u => Promise.race([inspect(u), new Promise(r => setTimeout(() => r({ input: u, error: "timeout", flags: [], score: null }), PER))]);
+// Optional layers, only when their keys are present (GitHub secrets): Google Safe Browsing, and the AI reading of each page.
+const WITH_SB = !!process.env.GOOGLE_SAFE_BROWSING_KEY, WITH_AI = !!process.env.ANTHROPIC_API_KEY && process.argv.includes("--ai");
+const timed = u => Promise.race([(async () => {
+  const r = await inspect(u);
+  if (WITH_SB && !r.error) { const sb = await safeBrowsing([r.input, ...(r.chain || []).map(c => c.url), r.finalUrl].filter(Boolean)); r.sbListed = !!(sb || []).length; }
+  if (WITH_AI && !r.error) { try { r.ai = await aiLink(r); } catch (e) { r.aiError = String(e.message || e); } }
+  r.full = finalVerdict({ ...r, listed: !!r.sbListed }, r.ai).score;
+  return r;
+})(), new Promise(r => setTimeout(() => r({ input: u, error: "timeout", flags: [], score: null }), PER * (WITH_AI ? 2 : 1)))]);
 
 const { urls: phish, feedSize, bySource } = await phishSample();
 const legit = legitList();
@@ -99,6 +109,14 @@ const m30 = metrics(res, 30), m60 = metrics(res, 60);
 const subset = (rows, thr) => metrics(rows.concat(L), thr);
 const signal = re => P.filter(x => (x.r.flags || []).some(f => re.test(f.e || ""))).length;
 const fpRows = L.filter(x => sc(x) >= 30);
+// Full pipeline (link check + Safe Browsing + AI page reading), when those keys were available. Flagged at a final score of 40, as in the app.
+const fullOn = WITH_SB || WITH_AI;
+function fullMetrics() {
+  let tp = 0, fp = 0, tn = 0, fn = 0;
+  res.forEach(x => { const p = (x.r.full ?? 0) >= 40; if (x.label === "phish") p ? tp++ : fn++; else p ? fp++ : tn++; });
+  return { tp, fp, tn, fn, recall: tp / (tp + fn || 1), precision: tp + fp ? tp / (tp + fp) : null, fpr: fp / (fp + tn || 1) };
+}
+const mf = fullOn ? fullMetrics() : null;
 const day = new Date().toISOString().slice(0, 10) + (TAG ? "-" + TAG : "");
 
 const md = `# Link check accuracy — ${day}
@@ -116,7 +134,7 @@ Run of \`scripts/eval-links.mjs\` (the same \`inspect()\` the app uses). Took ${
 | 30 (suspicious) | ${pct(m30.recall)} | ${pct(m30.precision)} | ${pct(m30.fpr)} | ${pct(m30.f1)} | ${m30.tp} | ${m30.fn} | ${m30.fp} | ${m30.tn} |
 | 60 (high risk) | ${pct(m60.recall)} | ${pct(m60.precision)} | ${pct(m60.fpr)} | ${pct(m60.f1)} | ${m60.tp} | ${m60.fn} | ${m60.fp} | ${m60.tn} |
 
-| Subset | Recall at 30 | Recall at 60 |
+${mf ? `**Full pipeline** (${[WITH_SB && "Google Safe Browsing", WITH_AI && "AI reading of each page"].filter(Boolean).join(" + ")} on top of the link check; flagged at a final score of 40, as in the app): caught ${pct(mf.recall)}, precision ${pct(mf.precision)}, false alarms ${pct(mf.fpr)} (TP ${mf.tp}, FN ${mf.fn}, FP ${mf.fp}, TN ${mf.tn}). Official UAE sites flagged: ${off.filter(x => (x.r.full ?? 0) >= 40).length} of ${off.length}.\n\n` : "_Full pipeline not measured in this run (no Safe Browsing or AI key available to the runner)._\n\n"}| Subset | Recall at 30 | Recall at 60 |
 |---|---|---|
 | Phishing still online (${reached.length}) | ${pct(subset(reached, 30).recall)} | ${pct(subset(reached, 60).recall)} |
 | Phishing already down (${dead.length}) | ${pct(subset(dead, 30).recall)} | ${pct(subset(dead, 60).recall)} |
@@ -130,7 +148,7 @@ ${fpRows.length ? "**Legitimate sites flagged (score 30+)**\n\n" + fpRows.map(x 
 `;
 fs.mkdirSync("eval/results", { recursive: true });
 fs.writeFileSync(`eval/results/${day}.md`, md);
-const csv = ["label,link,score,level,reached,final_domain,domain_age_days,hosting,reasons", ...res.map(x => [x.label, x.label === "phish" ? defang(x.u) : x.u, sc(x), x.r.level || "", x.r.reached ? 1 : 0,
+const csv = ["label,link,score,full_score,sb_listed,ai_score,level,reached,final_domain,domain_age_days,hosting,reasons", ...res.map(x => [x.label, x.label === "phish" ? defang(x.u) : x.u, sc(x), x.r.full ?? "", x.r.sbListed ? 1 : "", x.r.ai?.score ?? "", x.r.level || "", x.r.reached ? 1 : 0,
   x.label === "phish" ? defang(x.r.finalDomain || "") : x.r.finalDomain || "", x.r.whois?.ageDays ?? "", x.r.hosting?.org || "", (x.r.flags || []).filter(f => f.pts > 0).map(f => f.e).join(" | ")]
   .map(v => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; }).join(","))].join("\n");
 fs.writeFileSync(`eval/results/${day}.csv`, csv);
