@@ -96,7 +96,7 @@ export default function Home() {
     setBusy(true); setRes(null);
     try {
       const r = await fetch("/api/scan", { method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ lang, platform, sourceUrl: url.trim(), text: text.trim(), images: imgs.map(i => i.full), thumbs: imgs.map(i => i.thumb), phash: imgs.map(i => i.hash), postImg: imgs[0]?.post || "" }) });
+        body: JSON.stringify({ lang, platform, sourceUrl: url.trim(), text: text.trim(), images: imgs.map(i => i.full), thumbs: imgs.map(i => i.thumb), phash: imgs.map(i => i.hash), qr: imgs.map(i => i.qr).filter(Boolean), postImg: imgs[0]?.post || "" }) });
       const j = await r.json().catch(() => ({ error: t("eConn") }));
       if (!r.ok) throw new Error((j.error || t("eGeneric")) + (j.code ? " [" + j.code + "]" : ""));
       setRes(j);

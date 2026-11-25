@@ -174,6 +174,7 @@ export default function ResultView({ c, links = [], onDeep, deepBusy, onCopy, on
             <span className="pill">{t("p_" + platId(c.platform))}</span>
             {c.userReports > 0 && <span className="pill red">{t("userReports", { n: t.n(c.userReports) })}</span>}
             {c.source === "رصد آلي" && <span className="pill">{t("auto")}</span>}
+            {c.source === "رصد مبكر" && <span className="pill red">{t("early")}</span>}
           </div>
           <p className="summary" dir="auto">{c.deep?.status === "done" && c.deep.summary ? c.deep.summary : r.summary}</p>
         </div>
