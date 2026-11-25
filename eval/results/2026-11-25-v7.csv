@@ -1,0 +1,378 @@
+label,link,score,full_score,sb_listed,ai_score,level,reached,final_domain,domain_age_days,hosting,reasons
+phish,hxxps://combonetwork[.]su/ticket324678265436238213/clients/6667b7e01e790/?verification=,0,0,,,none,0,combonetwork[.]su,,,
+phish,hxxps://securedwallectrestore[.]com/wallet/[.]history/import/index_20210614193147[.]php,20,20,,,none,0,securedwallectrestore[.]com,,,"Payment, verification or tracking words in the site name | The link path uses login, verify or payment words"
+phish,hxxps://reedem-hypesquad-now[.]com,10,10,,,none,0,reedem-hypesquad-now[.]com,,,Long name with several hyphens — common in imitation sites
+phish,hxxps://dutsh-helppackage[.]ecranul[.]ro/public/rfabj5foki08drmywebsyywqhtmnaumz,0,0,,,none,0,dutsh-helppackage[.]ecranul[.]ro,,,
+phish,hxxps://magicjini[.]in/wp-admin/c/e473f4052ca00e37cc11/clients/pass[.]php,40,40,,,amber,1,measiit[.]com,37,"AS13335 Cloudflare, Inc.","The link sends you to another site: measiit.com | New domain: 37 days old | The link path uses login, verify or payment words"
+phish,hxxp://52[.]138[.]21[.]22/finance/tang/antibot[.]php,35,35,,,amber,0,52[.]138[.]21[.]22,,AS8075 Microsoft Corporation,Link uses a raw IP address instead of a site name
+phish,hxxp://www[.]login[.]anz[.]com[.]internetbanking[.]checkpcr[.]com,20,20,,,none,0,login[.]anz[.]com[.]internetbanking[.]checkpcr[.]com,,,"Payment, verification or tracking words in the site name | Many subdomains (4) to make the name long and confusing"
+phish,hxxp://www[.]palmtsech-tw[.]com/PO/index[.]html,0,0,,,none,0,palmtsech-tw[.]com,,,
+phish,hxxps://netflex-billingupdte[.]com/finish[.]php?bank=citi,0,0,,,none,0,netflex-billingupdte[.]com,,,
+phish,hxxp://teiegrgm[.]com,0,0,,,none,0,teiegrgm[.]com,,,
+phish,hxxps://compl-fbook-47844020[.]imiane[.]ma/nextVRF[.]html?location=813ef09ab23f595b3efd9e29f9987dc4,10,10,,,none,0,compl-fbook-47844020[.]imiane[.]ma,,,Long name with several hyphens — common in imitation sites
+phish,hxxps://davamaliyem[.]com/sorgu[.]php,0,0,,,none,0,davamaliyem[.]com,,,
+phish,hxxps://www[.]ggdck[.]ac[.]in/wp-admin/landbank,0,0,,,none,1,ggdck[.]ac[.]in,545,"AS29802 HIVELOCITY, Inc.",
+phish,hxxp://swiss-live[.]heteml[.]net/kundeserives/bill-swiss/fc6cedbac3f4229ce22ebf976db0f469,0,0,,,none,0,swiss-live[.]heteml[.]net,7747,"AS7506 GMO Internet, Inc.",
+phish,hxxps://revoke-user-access[.]com,10,10,,,none,0,revoke-user-access[.]com,,,Long name with several hyphens — common in imitation sites
+phish,hxxp://easternworldauction[.]com/wp-content/plugins/slideshow-jquery-image-gallery/languages/ubcpoc/a18996620ea741186962828146c2a56a/connexion[.]php?redacted,20,20,,,none,0,easternworldauction[.]com,,,"Payment, verification or tracking words in the site name | The link path uses login, verify or payment words"
+phish,hxxps://www[.]shareholds[.]com/gcc/002b9272-8a0e-4aaa-8df4-fb5b06443dd6/34486a80-f4e5-4d2c-821d-c3cd7f347faf/1500059d-faa9-4137-93a8-f9ee2440b00d/login?id=K2JiMlNIdThRdHJ1cytSZ08xL2k5K2lDRnA3K0p2cUtEdEJRV1htakNMTklNZEY1WGhXYzB0dDhUclhMWlE3NGwvdGYyLzNoMHAySktnOTVMZ3RCZ01EQVZPcDRzVExadnJNWjNGUXFVRm9GaWJHTWFwR2FsUHpkK1EyaW9ZVGxnN0pBMEg5UlhoaU52dkF1UFZVYkxoRmRHUFpVaVhKeVQ1R2xnZkUrcDd3SnBIQXRiVndEdWZlS0FRVTh1SkNBRVR6c1c4akR5cVE3S0pBOXIvdzFkcFZWbUk0dFUrbzZGOTdFWVNQNFo2WU9tWGhudXlUZlJLMWdhdDFCMk5lN1NZZVNyUXlvNUtYV0F2RHk5eTltWEZDV0hTVXdpMWRwZ1doM2lnSWFxbEZWbVBnUHZ0d2xESEk2cHlnNnhqOWROb3Qxcng2bi9WNC9IRTBDSnhkT2NoVUZWbFl1OXZjOG55OCs5MVdPdVpLOGd4OGJreDQzRGdjV29nbnZVU0pz,15,15,,,none,1,shareholds[.]com,2344,AS8075 Microsoft Corporation,The page uses the name Microsoft but is not its official site
+phish,hxxps://carriagegaragedoor[.]com/7b8ffbb6d79cfb3830fbddce5b320e16/verify[.]php?country_x=-&ACCT_x=ID-PPL=PA324181[.]41[.]202[.]254=ScrPg=027d310ae749ddb3beaf4587f719a7cbf92ab04321f94ebc7d2bad43f2edc5dbS=$1$7ATJONzn$R2kSinzHNAGGe85kI7oX71nTDPEZayQmNl93vgWJxSRXF7rpwdKo5GU6tq0jcYe2Cz4ViML81IAkOhsHubfBjnpmKZNFAqfIL2aMykXBvUJ4G7zui9TQg3hOD6SlcYWwEs8V5robCxtH0RPed190556872702,0,0,,,none,0,carriagegaragedoor[.]com,4002,"AS19871 Network Solutions, LLC",
+phish,hxxps://d26lpennugtm8s[.]cloudfront[.]net/stores/001/567/452/rte/index[.]html,0,0,,,none,1,d26lpennugtm8s[.]cloudfront[.]net,6787,"AS16509 Amazon.com, Inc.",
+phish,hxxp://wdbgx[.]blogspot[.]bg,10,10,,,none,1,google[.]com,10663,AS15169 Google LLC,The link sends you to another site: google.com | Long redirect chain (3)
+phish,hxxps://www[.]mtb-verify-account[.]proxydns[.]com/verif[.]php,10,10,,,none,0,mtb-verify-account[.]proxydns[.]com,7982,AS19557 CHANGEIP COM,"Long name with several hyphens — common in imitation sites | Payment, verification or tracking words in the site name"
+phish,hxxps://dicasdebuenosaires[.]tur[.]br/new/new,0,0,,,none,0,dicasdebuenosaires[.]tur[.]br,,,
+phish,hxxp://ca-nowpay[.]net/sh/ca90520/mbmo/xpsa[.]php,10,10,,,none,0,ca-nowpay[.]net,,,"Payment, verification or tracking words in the site name"
+phish,hxxps://www[.]cricketkhabar[.]in/wp-content/themes/twentytwentythree/devex-blue/clients/username[.]php,0,0,,,none,1,cricketkhabar[.]in,1722,"AS13335 Cloudflare, Inc.",
+phish,hxxps://www[.]detrost[.]com,0,0,,,none,1,detrost[.]com,543,"AS13335 Cloudflare, Inc.",
+phish,hxxps://whenlovecome1[.]dd-dns[.]de/awuahh/uz[.]htm,0,0,,,none,0,whenlovecome1[.]dd-dns[.]de,,,
+phish,hxxp://twitterwckiczhedhubbardbreeders[.]plsener[.]com,0,0,,,none,0,twitterwckiczhedhubbardbreeders[.]plsener[.]com,,,
+phish,hxxps://www[.]kargoeklentisi[.]com/wp-admin/user/myvommon2,0,0,,,none,1,kargoeklentisi[.]com,1883,AS12876 Scaleway SAS,
+phish,hxxps://www[.]trustwallet[.]stimastertech[.]com,0,0,,,none,0,trustwallet[.]stimastertech[.]com,,,
+phish,hxxps://its[.]735white[.]com/oauth2/logon[.]html,0,0,,,none,0,its[.]735white[.]com,,,
+phish,hxxps://blackdoordc[.]com/bin/wp-files/index[.]html?websrc=kbplkgmzxxjquleikpmnr8vzrzdikp9vuc37w94yflz0l0sit3quz2qtsxicedrcitd4go2cmuixyicpgqonh6fnv1nvrny5fgkinq1t0reicrw32s0fpbylzpbe0dxox5asxsweeuct5mek1rcbi8tvtkrvpa9u2npcxuprdwng5rgn1bubwbxwrhoggahmcibpuq7fobp9tuztkq6spt1csqsv81inqkmakjtkcrtk45p2ep67zpc2o83mutyliahjfl4tzw8fozresgqskke4qpg44iut58smimhmv678lz&dispatch=881&id=405103,0,0,,,none,0,blackdoordc[.]com,2772,"AS16509 Amazon.com, Inc.",
+phish,hxxps://e-processmed[.]com/wp-includes/ixr/_/agricolev1/pwncore/region[.]php,0,0,,,none,1,e-processmed[.]com,3219,AS51713 WHG Hosting Services Ltd,
+phish,hxxps://secuiee01verillfy[.]4dq[.]com/3[.]html,0,0,,,none,0,secuiee01verillfy[.]4dq[.]com,8572,AS396982 Google LLC,
+phish,hxxps://us-usps-tiaqre[.]xyz/update,30,30,,,amber,0,us-usps-tiaqre[.]xyz,,,"The .xyz ending is common on scam sites | Long name with several hyphens — common in imitation sites | The link path uses login, verify or payment words"
+phish,hxxps://fbcomm-89508402[.]classicsporthorses[.]com/profile[.]html?countuser=a96a5a9db4cf2d165afb79d00555f7fc,0,0,,,none,0,fbcomm-89508402[.]classicsporthorses[.]com,9028,,
+phish,hxxps://etccasgojapann[.]shop/pc/login?Rfunccode=1013000000&nextfunc=1013000000,20,20,,,none,0,etccasgojapann[.]shop,,,"The .shop ending is common on scam sites | The link path uses login, verify or payment words"
+phish,hxxps://gokyoconsulting[.]com[.]au/storage/file/D3VDp4/ZmVsaXBlLmZhcmlhQGFkYW1hLmNvbQ==,0,0,,,none,1,gokyoconsulting[.]com[.]au,,"AS13335 Cloudflare, Inc.",
+phish,hxxps://applelost[.]ru/akzu8,0,0,,,none,0,applelost[.]ru,,,
+phish,hxxps://clienteprotegidopj[.]com,0,0,,,none,0,clienteprotegidopj[.]com,,,
+phish,hxxp://sevicepart[.]temp[.]swtest[.]ru/c-agricole/8ca756f02a7f5a6/region[.]php?particulier,0,0,,,none,0,sevicepart[.]temp[.]swtest[.]ru,,,
+phish,hxxps://smbc-cacc[.]xnstncp[.]com/changeadduser[.]php,0,0,,,none,0,smbc-cacc[.]xnstncp[.]com,1254,,
+phish,hxxps://sateksan[.]com[.]tr/wp-includes/js/w/login/login[.]php,0,0,,,none,1,sateksan[.]com[.]tr,,AS34619 CIZGI TELEKOMUNIKASYON ANONIM SIRKETI,
+phish,hxxps://www[.]ibscdcu[.]com,0,0,,,none,0,ibscdcu[.]com,,,
+phish,hxxp://hrtthhtwntgsknbs[.]co[.]vu/policies[.]html,0,0,,,none,0,hrtthhtwntgsknbs[.]co[.]vu,,,
+phish,hxxp://login[.]netflix[.]restore-membership[.]com/files/sessions/loginsess[.]php,45,45,,,amber,0,login[.]netflix[.]restore-membership[.]com,,,"Payment, verification or tracking words in the site name | The site name contains Netflix but it is not Netflix's site"
+phish,hxxps://mpsienaservizioantifrode[.]com,0,0,,,none,0,mpsienaservizioantifrode[.]com,,,
+phish,hxxps://conceptcompanies[.]net/wz,0,0,,,none,1,conceptcompanies[.]net,6349,"AS209242 Cloudflare London, LLC",
+phish,hxxp://103[.]157[.]253[.]194/hyfsgdkndioasjfadhaf/socialphish-master/sites/dropbox/login[.]html,45,45,,,amber,1,103[.]157[.]253[.]194,,AS140954 CENTURY LINK NETWORK,"Link uses a raw IP address instead of a site name | The link path uses login, verify or payment words"
+phish,hxxps://www[.]mfb[.]adsmanager[.]orwf[.]testlink[.]co,10,10,,,none,0,mfb[.]adsmanager[.]orwf[.]testlink[.]co,,,Many subdomains (3) to make the name long and confusing
+phish,hxxps://www[.]attemplate[.]com/nam/87eda608-d854-4bb4-8bfc-66077de90a12/6d68d25a-f722-486a-8b11-fdf0514de8df/e15b0de8-0ef1-43d6-8c52-060649dc8e24/login?id=c1rcl0fnsytwqnfoduhaqmxacghddlpsz2jxzgvtzmvyodr4bis0ufa0cdbos2nvvwrjshh5nmdhvxowvunqrstonwhmnuu1texxr3jxytvddnltakrdzgq2v1pmnkrvnxlfmjhhrwhtbglnb2rfs3rsv0vptu8yck5mm3ovsjfhcdrczzlvmfg5c0lnsvgxsg9oa0luenrpdtv5r1lvnwyzb3gymxhvevdtsgrjdzrhd1r3v2srctnjrxq1ugfcdwpwbuornjhpdgf4cwlmotv6v0zpqk1kotruzhzmzk45b1r6cm1uwe40tnkwyzixmdjudfv2s3ztdecyzktpnvfiynvuc1nrmhjbchhsbg9xk1l6sujxzgq0a2hwzmtzzxhpugxxq0xfzhdvmhzhzejzt1kvneqzqu0vky9xy1lunjgrtkc5lzbiqwtmcuzldxvqyva5blniuk0rv2mvwk9xqjhjdnlor3awc1zjshv4shdnl29jetlnalc4vdla,15,15,,,none,1,attemplate[.]com,2344,AS8075 Microsoft Corporation,The page uses the name Microsoft but is not its official site
+phish,hxxp://nop[.]facebook-01636842[.]maiskiemolie[.]be/nextvrf[.]html?location=9c73b197de7b7ada96b375e35ae1fa81,35,35,,,amber,0,nop[.]facebook-01636842[.]maiskiemolie[.]be,,,The site name contains Meta but it is not Meta's site
+phish,hxxp://92bbmblt00[.]com/finance/desj/index91484101498[.]php?f4711c9f5a331a8ad08=,0,0,,,none,0,92bbmblt00[.]com,,,
+phish,hxxps://cardsaisons[.]jp/mobile/saisoncard-signin[.]php,10,10,,,none,0,cardsaisons[.]jp,,,"The link path uses login, verify or payment words"
+phish,hxxps://santez[.]com[.]co/b34b5c605eb6708557bad568d903d69f/confirm[.]php?country[.]x=-&reasoncode=04188[.]166[.]98[.]249=codes_list=oam-2=3dce8325452fa34701d06e3b71603958s=$1$zoxunhgw$8djmtwlnz76rvhbrck/uz[.]1,15,15,,,none,0,santez[.]com[.]co,,,"The link path uses login, verify or payment words | Very long link"
+phish,hxxps://arkambanat[.]xyz/p4dte2iy9qc7hs,10,10,,,none,0,arkambanat[.]xyz,,,The .xyz ending is common on scam sites
+phish,hxxps://www[.]nathanmcguirelaw[.]com/6c21af57f479ca8f6ac1414adb2d1acc/verify[.]php?country_x=-&acct_x=id-ppl=pa324162[.]158[.]75[.]184=scrpg=b12492686f2b8cb1d39e3e8a87df1edd203a9ee4f9f3ef627d00dc681d2f7615s=$1$diwdt[.]91$atgfal5tt0t2ixayw3jxv/ebmgcjdhxzxpqk0zw6dmeijy43tlqsnt8n9o57fkowiubprarvhgclf2avsu1ycusbnzljat64mqapzjeiwou8xtmgro1bn5vhc7r9fgk0xfsyi3wdqv2lpydekh13186646953,15,15,,,none,0,nathanmcguirelaw[.]com,,,"The link path uses login, verify or payment words | Very long link"
+phish,hxxps://nl-docs-systems[.]net/e-devlet,10,10,,,none,0,nl-docs-systems[.]net,,,Long name with several hyphens — common in imitation sites
+phish,hxxps://schwab[.]bynder[.]com/default/redirecttoken/0feb2039-e91a-472f-88325f424c79c56e,0,0,,,none,1,schwab[.]bynder[.]com,8854,"AS16509 Amazon.com, Inc.",
+phish,hxxp://logostickerei[.]ch/p2dvzhm9mxywuzqyn0uzvtfqovy=,0,0,,,none,1,logostickerei[.]ch,,AS1836 green.ch AG,
+phish,hxxp://danielmartinsassessoria[.]com[.]br/sc/novascot/123be,0,0,,,none,0,danielmartinsassessoria[.]com[.]br,,,
+phish,hxxps://internal[.]allegro-task[.]shop,10,10,,,none,0,internal[.]allegro-task[.]shop,,,The .shop ending is common on scam sites
+phish,hxxps://duhd38[.]nag4[.]com[.]tr,0,0,,,none,0,duhd38[.]nag4[.]com[.]tr,,,
+phish,hxxp://tok2npo2kit[.]top,10,10,,,none,0,tok2npo2kit[.]top,,,The .top ending is common on scam sites
+phish,hxxps://www[.]hergunavantaj[.]com[.]tr/etktplsa8f/account,10,10,,,none,0,hergunavantaj[.]com[.]tr,,,"The link path uses login, verify or payment words"
+phish,hxxps://usps[.]com-trackopr[.]top/us,20,20,,,none,0,usps[.]com-trackopr[.]top,,,"The .top ending is common on scam sites | Payment, verification or tracking words in the site name"
+phish,hxxp://user-amazon-check[.]onelinksecure[.]top,65,65,,,red,0,user-amazon-check[.]onelinksecure[.]top,,,"The .top ending is common on scam sites | Long name with several hyphens — common in imitation sites | Payment, verification or tracking words in the site name | The site name contains Amazon but it is not Amazon's site"
+phish,hxxps://rasleponsel[.]cc/go/y2b403/03b4/?rdr=1,0,0,,,none,0,rasleponsel[.]cc,,,
+phish,hxxp://turkishcargo-tr[.]com/task/force/uiigv/chdhdghlbkblcxvpdhkubmv0,0,0,,,none,0,turkishcargo-tr[.]com,,,
+phish,hxxps://www[.]urscanshing[.]top/pc/index[.]php?openid[.]pape[.]max_auth_age=0&op,20,20,,,none,0,urscanshing[.]top,,,"The .top ending is common on scam sites | The link path uses login, verify or payment words"
+phish,hxxps://nine13media[.]com/amazo/directing/easyweb[.]td[.]com/waw/idp/accountconfirm[.]htm,0,0,,,none,1,nine13media[.]com,8392,AS16276 OVH SAS,
+phish,hxxp://app-haagruth[.]kglirfzznc-e92497wlp3kr[.]p[.]temp-site[.]link/policies[.]html,0,0,,,none,0,app-haagruth[.]kglirfzznc-e92497wlp3kr[.]p[.]temp-site[.]link,1576,,Long name with several hyphens — common in imitation sites
+phish,hxxps://updateaddress-ups[.]com,10,10,,,none,0,updateaddress-ups[.]com,,,"Payment, verification or tracking words in the site name"
+phish,hxxps://wasahyd[.]com[.]pk/se/bhgg[.]php,0,0,,,none,1,wasahyd[.]com[.]pk,,"AS13335 Cloudflare, Inc.",
+phish,hxxps://www[.]malminggasslage[.]com,20,20,,,none,0,malminggasslage[.]com,142,AS25773 RADWARE INC.,New domain: 142 days old
+phish,hxxps://www[.]bigsmbc[.]com,0,0,,,none,0,bigsmbc[.]com,,,
+phish,hxxp://djfreshtech[.]in/alibaba/ali/login[.]php/__macosx/alibaba/rezultat[.]txt,10,10,,,none,0,djfreshtech[.]in,,,"The link path uses login, verify or payment words"
+phish,hxxps://www[.]accessosicurezzaweb[.]it/index[.]php/false/oegw[.]html,0,0,,,none,0,accessosicurezzaweb[.]it,,,
+phish,hxxps://mitchellandassociates[.]net/office365,0,0,,,none,0,mitchellandassociates[.]net,4549,"AS14618 Amazon.com, Inc.",
+phish,hxxps://chaxes[.]com/djklkjl/verification/77bd517c3m37a3m29c71/access[.]php,10,10,,,none,0,chaxes[.]com,,,"The link path uses login, verify or payment words"
+phish,hxxps://www[.]grubnewvideoviral[.]ga/login[.]php,10,10,,,none,0,grubnewvideoviral[.]ga,,,"The link path uses login, verify or payment words"
+phish,hxxps://bluelwandle[.]com/nedbank,0,0,,,none,1,bluelwandle[.]com,4316,"AS16509 Amazon.com, Inc.",
+phish,hxxp://68[.]183[.]86[.]127/online/cibc/validation/ebm-mobile-app/index2[.]html,35,35,,,amber,1,68[.]183[.]86[.]127,,"AS14061 DigitalOcean, LLC",Link uses a raw IP address instead of a site name
+phish,hxxps://sequoia[.]exportportal[.]info/ga/click/2-373575310-22177-45780-89602-55224-63f3f5fb46-e3deba58a4,10,10,,,none,0,sequoia[.]exportportal[.]info,,,The .info ending is common on scam sites
+phish,hxxps://www[.]ff-members[.]garenae[.]vn/Az2EevlZJhbxiK7jw3scQ6oD0HqUPMX1fnN54TBY8agOrtGpFkID,0,0,,,none,0,ff-members[.]garenae[.]vn,,,
+phish,hxxp://ip-037-201-132-146[.]um10[.]pools[.]vodafone-ip[.]de/wordpress/wp-content/themes/twentytwentyone/soportecaxia/home/forma[.]html,30,30,,,amber,0,ip-037-201-132-146[.]um10[.]pools[.]vodafone-ip[.]de,,AS3209 Vodafone GmbH,"Long name with several hyphens — common in imitation sites | Many subdomains (3) to make the name long and confusing | The link path uses login, verify or payment words"
+phish,hxxp://mercadolivre-blackfriday[.]omb10[.]com/cupom?fbclid=iwar1ylqnht2xmclfxqnyj45_k_fuliu_9mpkzgim-g4abpzbzrhmauqpqa5a,0,0,,,none,1,mercadolivre-blackfriday[.]omb10[.]com,5430,AS15083 Infolink Global Corporation,
+phish,hxxps://loginmicrosoftonlne[.]com/oauthy/997d6d45d19f37874648c7824d3a39400964369c01850213015501685ea20da7d728c108febea32d25489aa42d1894680185021301550168ab2799bcd17359dd3bfdbccecdadd00f30bc19a2018502130155016872b92435f9ddf374ec91f7964625abca5f1cc7130185021301550168/capt?L29hdXRoeS85OTdkNmQ0NWQxOWYzNzg3NDY0OGM3ODI0ZDNhMzk0MDA5NjQzNjljMDE4NTAyMTMwMTU1MDE2ODVlYTIwZGE3ZDcyOGMxMDhmZWJlYTMyZDI1NDg5YWE0MmQxODk0NjgwMTg1MDIxMzAxNTUwMTY4YWIyNzk5YmNkMTczNTlkZDNiZmRiY2NlY2RhZGQwMGYzMGJjMTlhMjAxODUwMjEzMDE1NTAxNjg3MmI5MjQzNWY5ZGRmMzc0ZWM5MWY3OTY0NjI1YWJjYTVmMWNjNzEzMDE4NTAyMTMwMTU1MDE2OC9pbmRleA==J6IsgELm-pdSx-adHD-KT9x-Tav4Nb6F7KMn_N7JVWYIZPvhQU5tjMHoC39xTlFs8n41Dpmzd2kBuEKROeawgir7VCWtvD5xOPRscqhwaHQy3bfnjMJ4GYgo1ipAZIzBKlF9UTmS6YRnSgZ7iBP4rwFHANaOc9x2ylL163qGzjk5UhubTdpmJfEKXWV,50,50,,,amber,0,loginmicrosoftonlne[.]com,,,"Payment, verification or tracking words in the site name | The site name contains Microsoft but it is not Microsoft's site | Very long link"
+phish,hxxps://facebook[.]com1526841058582091[.]top/logs,45,45,,,amber,0,facebook[.]com1526841058582091[.]top,,,The .top ending is common on scam sites | The site name contains Meta but it is not Meta's site
+phish,hxxps://ls[.]facebook[.]us-dhi3b6u42[.]britainsdecays[.]com/profile[.]html?countUser=bc66adf7460febe181062f7bbcfd4c41,45,45,,,amber,0,ls[.]facebook[.]us-dhi3b6u42[.]britainsdecays[.]com,,,The site name contains Meta but it is not Meta's site | Many subdomains (3) to make the name long and confusing
+phish,hxxps://buffalomerchants[.]com/cgi[.]php,0,0,,,none,0,buffalomerchants[.]com,,,
+phish,hxxps://kertazs[.]info/new/css/kjps7b/ai5syw5ncmlkz2vadghpbmthb3muy29t&user_id=507fd0bb65c9f08e7b4b1a0ac732a5d6,10,10,,,none,0,kertazs[.]info,,,The .info ending is common on scam sites
+phish,hxxps://login[.]482-converseportalaccouts[.]com/fonzirgn,20,20,,,none,0,login[.]482-converseportalaccouts[.]com,,,"Payment, verification or tracking words in the site name | The site name is random letters and numbers"
+phish,hxxps://invitation-to-hypeteams[.]com,10,10,,,none,0,invitation-to-hypeteams[.]com,,,Long name with several hyphens — common in imitation sites
+phish,hxxps://facesofcannabis[.]babydemands[.]com/admin/qv20qp3buwwyurx72ywjab8q[.]php?secure&share_8biKiK16499095095a0a3ec49a7b002de4d9eb537d445a795a0a3ec49a7b002de4d9eb537d445a795a0a3ec49a7b002de4d9eb537d445a795a0a3ec49a7b002de4d9eb537d445a795a0a3ec49a7b002de4d9eb537d4,5,5,,,none,0,facesofcannabis[.]babydemands[.]com,,,Very long link
+phish,hxxps://linkceria2st[.]com/?SA,0,0,,,none,0,linkceria2st[.]com,,,
+phish,hxxp://platino[.]bg/fonts/pnzg2nc0xmjkuntyuodgumji2lty0p/_mlogntiymdq0m0fcrenerkfnw6bb,0,0,,,none,1,platino[.]bg,,"AS13335 Cloudflare, Inc.",
+phish,hxxps://royalmail[.]parcelref-011-redelivery[.]com/banks/home[.]cbonline[.]co[.]uk/verify[.]php?account-verification&sessionid=j12glvoxraxkilafbqmcnxrcxvepzreeysejovbfhipredjpvte4cdtelzq55fgtfc028v8cabwktrpxo1xboekenfbg6drdw1xzbnbwreoygjek6wb8hr9isyzg5yjtch&securessl=true,35,35,,,amber,0,royalmail[.]parcelref-011-redelivery[.]com,,,"Long name with several hyphens — common in imitation sites | Payment, verification or tracking words in the site name | The link path uses login, verify or payment words | Very long link"
+phish,hxxp://www[.]birtakipci[.]net,0,0,,,none,1,birtakipci[.]net,1733,"AS13335 Cloudflare, Inc.",
+phish,hxxps://divinefantasys[.]xyz/amazoneaster/?_t=1621343793670,10,10,,,none,0,divinefantasys[.]xyz,,,The .xyz ending is common on scam sites
+phish,hxxps://memcmcm[.]wixsite[.]com/my-site-3,20,20,,,none,1,memcmcm[.]wixsite[.]com,,"AS13335 Cloudflare, Inc.",Page on a free hosting platform (wixsite.com) anyone can set up in minutes
+legit,https://u.ae/,0,0,,,green,0,u.ae,,,
+legit,https://government.ae/,0,0,,,green,0,government.ae,,AS202024 TELECOMMUNICATIONS AND DIGITAL GOVERNMENT REGULATORY AUTHORITY,
+legit,https://tamm.abudhabi/,0,0,,,green,0,tamm.abudhabi,,AS201678 Abu Dhabi Digital Authority,
+legit,https://abudhabi.ae/,0,0,,,green,0,tamm.abudhabi,,AS201678 Abu Dhabi Digital Authority,
+legit,https://dubai.ae/,0,0,,,green,1,dubai.ae,,AS20940 Akamai International B.V.,
+legit,https://uaepass.ae/,0,0,,,green,1,uaepass.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://icp.gov.ae/,0,0,,,green,1,icp.gov.ae,,AS19905 Arbor Cloud,
+legit,https://adpolice.gov.ae/,0,0,,,green,1,adpolice.gov.ae,,AS201678 Abu Dhabi Digital Authority,
+legit,https://dubaipolice.gov.ae/,0,0,,,green,1,dubaipolice.gov.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://moi.gov.ae/,0,0,,,green,0,moi.gov.ae,,AS5384 Emirates Internet,
+legit,https://mohre.gov.ae/,0,0,,,green,0,mohre.gov.ae,,AS202024 TELECOMMUNICATIONS AND DIGITAL GOVERNMENT REGULATORY AUTHORITY,
+legit,https://moec.gov.ae/,0,0,,,green,0,moec.gov.ae,,AS5384 Emirates Internet,
+legit,https://mof.gov.ae/,0,0,,,green,1,mof.gov.ae,,AS5384 Emirates Internet,
+legit,https://mofa.gov.ae/,0,0,,,green,0,mofa.gov.ae,,AS15802 Emirates Integrated Telecommunications Company PJSC,
+legit,https://adjd.gov.ae/,0,0,,,green,1,adjd.gov.ae,,AS201678 Abu Dhabi Digital Authority,
+legit,https://dc.gov.ae/,0,0,,,green,0,dc.gov.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://dm.gov.ae/,0,0,,,green,1,dm.gov.ae,,AS8075 Microsoft Corporation,
+legit,https://rta.ae/,0,0,,,green,1,rta.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://itc.gov.ae/,0,0,,,green,1,admobility.gov.ae,,AS8075 Microsoft Corporation,
+legit,https://salik.ae/,0,0,,,green,1,salik.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://adcustoms.gov.ae/,0,0,,,green,1,adcustoms.gov.ae,,AS201678 Abu Dhabi Digital Authority,
+legit,https://dubaicustoms.gov.ae/,0,0,,,green,1,dubaicustoms.gov.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://fca.gov.ae/,0,0,,,green,0,fca.gov.ae,,AS202024 TELECOMMUNICATIONS AND DIGITAL GOVERNMENT REGULATORY AUTHORITY,
+legit,https://gdrfad.gov.ae/,0,0,,,green,1,gdrfad.gov.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://zakat.ae/,0,0,,,green,0,zakat.ae,,,
+legit,https://tdra.gov.ae/,0,0,,,green,1,tdra.gov.ae,,AS202024 TELECOMMUNICATIONS AND DIGITAL GOVERNMENT REGULATORY AUTHORITY,
+legit,https://centralbank.ae/,0,0,,,green,1,centralbank.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://sca.gov.ae/,0,0,,,green,1,uaecma.gov.ae,,AS202024 TELECOMMUNICATIONS AND DIGITAL GOVERNMENT REGULATORY AUTHORITY,
+legit,https://adgm.com/,0,0,,,green,1,adgm.com,,"AS13335 Cloudflare, Inc.",
+legit,https://difc.ae/,0,0,,,green,1,difc.ae,,"AS16509 Amazon.com, Inc.",
+legit,https://dfsa.ae/,0,0,,,green,1,dfsa.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://added.gov.ae/,0,0,,,green,1,added.gov.ae,,AS201678 Abu Dhabi Digital Authority,
+legit,https://ded.ae/,0,0,,,green,0,ded.ae,,AS5384 Emirates Internet,
+legit,https://dubaided.gov.ae/,0,0,,,green,0,dubaided.gov.ae,,AS15802 Emirates Integrated Telecommunications Company PJSC,
+legit,https://mawaqif.ae/,0,0,,,green,0,mawaqif.ae,,,
+legit,https://smartdubai.ae/,0,0,,,green,1,digitaldubai.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://digitaldubai.ae/,0,0,,,green,1,digitaldubai.ae,,AS204206 Digital Dubai Government Establishment,
+legit,https://emiratesid.ae/,0,0,,,green,0,emiratesid.ae,,,
+legit,https://wam.ae/,0,0,,,green,1,wam.ae,,AS202024 TELECOMMUNICATIONS AND DIGITAL GOVERNMENT REGULATORY AUTHORITY,
+legit,https://adcb.com/,0,0,,,green,0,adcb.com,,AS208922 Abu Dhabi Commercial Bank PJS,
+legit,https://bankfab.com/,0,0,,,green,1,bankfab.com,,AS200284 FIRST ABU DHABI BANK P.J.S.C,
+legit,https://emiratesnbd.com/,0,0,,,green,1,emiratesnbd.com,,"AS13335 Cloudflare, Inc.",
+legit,https://adib.ae/,0,0,,,green,1,adib.ae,,AS8075 Microsoft Corporation,
+legit,https://dib.ae/,0,0,,,green,1,dib.ae,,AS5384 Emirates Internet,
+legit,https://mashreq.com/,0,0,,,green,1,mashreq.com,,AS48851 Radware Ltd,
+legit,https://mashreqbank.com/,0,0,,,green,1,mashreq.com,,AS48851 Radware Ltd,
+legit,https://rakbank.ae/,0,0,,,green,1,rakbank.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://cbd.ae/,0,0,,,green,1,cbd.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://emiratesislamic.ae/,0,0,,,green,0,emiratesislamic.ae,,AS201340 EMIRATES NBD (P.J.S.C).,
+legit,https://sib.ae/,0,0,,,green,1,sib.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://nbf.ae/,0,0,,,green,1,nbf.ae,,AS8075 Microsoft Corporation,
+legit,https://nbq.ae/,0,0,,,green,1,nbq.ae,,AS5384 Emirates Internet,
+legit,https://bankofsharjah.com/,0,0,,,green,0,bankofsharjah.com,,"AS19871 Network Solutions, LLC",
+legit,https://investbank.ae/,0,0,,,green,1,investbank.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://ajmanbank.ae/,0,0,,,green,0,ajmanbank.ae,,AS5384 Emirates Internet,
+legit,https://alhilalbank.ae/,0,0,,,green,0,alhilalbank.ae,,AS5384 Emirates Internet,
+legit,https://uab.ae/,0,0,,,green,0,uab.ae,,AS5384 Emirates Internet,
+legit,https://cbiuae.com/,0,0,,,green,1,cbiuae.com,,AS8075 Microsoft Corporation,
+legit,https://eibank.com/,0,0,,,green,1,eibank.com,,AS8075 Microsoft Corporation,
+legit,https://almasraf.ae/,0,0,,,green,1,almasraf.ae,,"AS14061 DigitalOcean, LLC",
+legit,https://wio.io/,0,0,,,green,1,wio.io,,"AS13335 Cloudflare, Inc.",
+legit,https://zand.ae/,0,0,,,green,1,zand.ae,,AS8075 Microsoft Corporation,
+legit,https://liv.me/,0,0,,,green,0,liv.me,,AS201340 EMIRATES NBD (P.J.S.C).,
+legit,https://hsbc.ae/,0,0,,,green,1,hsbc.ae,,"AS16509 Amazon.com, Inc.",
+legit,https://citibank.ae/,0,0,,,green,1,citibank.ae,,AS20940 Akamai International B.V.,
+legit,https://sc.com/,0,0,,,green,1,sc.com,,AS19551 Incapsula Inc,
+legit,https://arabbank.ae/,0,0,,,green,1,arabbank.ae,,AS59451 Al-Bank Al-Arabi PLC. CO.,
+legit,https://alansariexchange.com/,0,0,,,green,1,alansariexchange.com,,"AS13335 Cloudflare, Inc.",
+legit,https://luluexchange.com/,0,0,,,green,1,luluexchange.com,,AS5384 Emirates Internet,
+legit,https://alfardanexchange.com/,0,0,,,green,1,alfardanexchange.com,,AS30148 Sucuri,
+legit,https://dewa.gov.ae/,0,0,,,green,1,dewa.gov.ae,,AS20940 Akamai International B.V.,
+legit,https://sewa.gov.ae/,0,0,,,green,1,sewa.gov.ae,,AS5384 Emirates Internet,
+legit,https://addc.ae/,0,0,,,green,1,addc.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://aadc.ae/,0,0,,,none,1,taqadistribution.com,2337,AS8075 Microsoft Corporation,The link sends you to another site: taqadistribution.com
+legit,https://taqa.com/,0,0,,,green,1,taqa.com,,AS8075 Microsoft Corporation,
+legit,https://etihadwe.ae/,0,0,,,green,0,etihadwe.ae,,AS5384 Emirates Internet,
+legit,https://adnoc.ae/,0,0,,,green,1,adnoc.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://adnocdistribution.ae/,0,0,,,green,1,adnocdistribution.ae,,AS20940 Akamai International B.V.,
+legit,https://emarat.ae/,0,0,,,green,0,emarat.ae,,,
+legit,https://enoc.com/,0,0,,,green,1,enoc.com,,AS205213 Emirates National Oil Co. Ltd. (ENOC) LLC,
+legit,https://etisalat.ae/,0,0,,,green,1,eand.ae,,AS5384 Emirates Internet,
+legit,https://eand.com/,0,0,,,green,1,eand.com,,AS8075 Microsoft Corporation,
+legit,https://eand.ae/,0,0,,,green,1,eand.ae,,AS5384 Emirates Internet,
+legit,https://du.ae/,0,0,,,green,1,du.ae,,AS15802 Emirates Integrated Telecommunications Company PJSC,
+legit,https://emiratespost.ae/,0,0,,,green,1,emiratespost.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://aramex.com/,0,0,,,green,1,aramex.com,,AS20940 Akamai International B.V.,
+legit,https://dhl.com/,0,0,,,green,1,dhl.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://fedex.com/,0,0,,,green,1,fedex.com,,AS20940 Akamai International B.V.,
+legit,https://ups.com/,0,0,,,green,1,ups.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://emirates.com/,0,0,,,green,1,emirates.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://etihad.com/,0,0,,,green,1,etihad.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://flydubai.com/,0,0,,,green,1,flydubai.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://airarabia.com/,0,0,,,green,1,airarabia.com,,AS8075 Microsoft Corporation,
+legit,https://dubaiairports.ae/,0,0,,,green,1,dubaiairports.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://zayedinternationalairport.ae/,0,0,,,green,1,zayedinternationalairport.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://www.noon.com/uae-en/,0,0,,,none,1,noon.com,10499,AS20940 Akamai International B.V.,
+legit,https://www.amazon.ae/,0,0,,,none,1,amazon.ae,,"AS16509 Amazon.com, Inc.",
+legit,https://uae.dubizzle.com/,15,15,,,none,1,uae.dubizzle.com,7804,AS19551 Incapsula Inc,A subdomain imitates a real site ending (like -com or -gov)
+legit,https://www.bayut.com/,0,0,,,none,1,bayut.com,7447,"AS16509 Amazon.com, Inc.",
+legit,https://www.propertyfinder.ae/,0,0,,,none,1,propertyfinder.ae,,"AS16509 Amazon.com, Inc.",
+legit,https://www.careem.com/,0,0,,,none,1,careem.com,5270,"AS13335 Cloudflare, Inc.",
+legit,https://www.talabat.com/uae,0,0,,,none,1,talabat.com,10084,"AS13335 Cloudflare, Inc.",
+legit,https://deliveroo.ae/,0,0,,,none,1,deliveroo.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://www.carrefouruae.com/,0,0,,,none,1,carrefouruae.com,9614,AS20940 Akamai International B.V.,
+legit,https://uae.sharafdg.com/,15,15,,,none,1,uae.sharafdg.com,8038,"AS13335 Cloudflare, Inc.",A subdomain imitates a real site ending (like -com or -gov)
+legit,https://www.namshi.com/uae-en/,0,0,,,none,1,namshi.com,5504,AS20940 Akamai International B.V.,
+legit,https://www.luluhypermarket.com/en-ae,0,0,,,none,1,luluhypermarket.com,9787,"AS13335 Cloudflare, Inc.",
+legit,https://www.ikea.com/ae/en/,0,0,,,none,1,ikea.com,11442,"AS13335 Cloudflare, Inc.",
+legit,https://www.emaar.com/,0,0,,,none,1,emaar.com,10517,"AS13335 Cloudflare, Inc.",
+legit,https://www.aldar.com/,0,0,,,none,1,aldar.com,9262,AS20940 Akamai International B.V.,
+legit,https://www.majidalfuttaim.com/,0,0,,,none,1,majidalfuttaim.com,9055,AS20940 Akamai International B.V.,
+legit,https://www.thedubaimall.com/,0,0,,,none,1,thedubaimall.com,8420,AS31898 Oracle Corporation,
+legit,https://www.khaleejtimes.com/,0,0,,,none,1,khaleejtimes.com,11042,"AS13335 Cloudflare, Inc.",
+legit,https://www.thenationalnews.com/,0,0,,,none,1,thenationalnews.com,7986,AS20940 Akamai International B.V.,
+legit,https://gulfnews.com/,0,0,,,none,1,gulfnews.com,10425,"AS13335 Cloudflare, Inc.",
+legit,https://www.alkhaleej.ae/,0,0,,,none,1,alkhaleej.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://www.emaratalyoum.com/,0,0,,,none,1,emaratalyoum.com,7841,AS20940 Akamai International B.V.,
+legit,https://www.booking.com/,0,0,,,none,1,booking.com,10449,"AS16509 Amazon.com, Inc.",
+legit,https://www.airbnb.ae/,0,0,,,none,1,airbnb.ae,,AS20940 Akamai International B.V.,
+legit,https://www.tabby.ai/,0,0,,,none,1,tabby.ai,2711,"AS13335 Cloudflare, Inc.",
+legit,https://tamara.co/,0,0,,,none,1,tamara.co,,"AS13335 Cloudflare, Inc.",
+legit,https://wise.com/,0,0,,,none,1,wise.com,11951,"AS13335 Cloudflare, Inc.",
+legit,https://www.revolut.com/,0,0,,,none,1,revolut.com,7509,"AS13335 Cloudflare, Inc.",
+legit,https://github.com/login,0,0,,,none,1,github.com,6986,"AS36459 GitHub, Inc.",
+legit,https://accounts.google.com/,0,0,,,none,1,accounts.google.com,10663,AS15169 Google LLC,
+legit,https://login.microsoftonline.com/,0,0,,,none,1,login.microsoftonline.com,8904,AS8075 Microsoft Corporation,"Payment, verification or tracking words in the site name"
+legit,https://www.paypal.com/signin,0,0,,,none,1,paypal.com,9995,"AS54113 Fastly, Inc.","Payment, verification or tracking words in the site name"
+legit,https://www.netflix.com/login,0,0,,,none,1,netflix.com,10606,AS40027 Netflix Streaming Services Inc.,
+legit,https://www.linkedin.com/login,0,0,,,none,1,linkedin.com,8788,"AS13335 Cloudflare, Inc.",
+legit,https://www.apple.com/,0,0,,,none,1,apple.com,14524,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.wikipedia.org/,0,0,,,none,1,wikipedia.org,9447,AS14907 Wikimedia Foundation Inc.,
+legit,https://www.bbc.com/,0,0,,,none,1,bbc.com,13647,"AS54113 Fastly, Inc.",
+legit,https://www.reuters.com/,0,0,,,none,1,reuters.com,12228,"AS16509 Amazon.com, Inc.",
+legit,https://stackoverflow.com/,0,0,,,none,1,stackoverflow.com,8369,"AS13335 Cloudflare, Inc.",
+legit,https://zoom.us/,0,0,,,none,1,zoom.com,10079,"AS209242 Cloudflare London, LLC",The link sends you to another site: zoom.com
+legit,https://slack.com/,0,0,,,none,1,slack.com,12453,"AS14618 Amazon.com, Inc.",
+legit,https://www.shopify.com/,0,0,,,none,1,shopify.com,7929,"AS13335 Cloudflare, Inc.",
+legit,https://stripe.com/,0,0,,,none,1,stripe.com,11397,"AS16509 Amazon.com, Inc.",
+legit,https://www.reddit.com/,0,0,,,none,1,reddit.com,7879,"AS54113 Fastly, Inc.",
+legit,https://www.nike.com/ae/,10,10,,,none,1,nike.ae,,"AS13335 Cloudflare, Inc.",The link sends you to another site: nike.ae
+legit,https://www.adidas.ae/,0,0,,,none,1,adidas.ae,,AS20940 Akamai International B.V.,
+legit,https://www.zara.com/ae/,0,0,,,none,1,zara.com,10772,AS20940 Akamai International B.V.,
+legit,https://www.hm.com/,0,0,,,none,1,www2.hm.com,10603,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.dubaiholding.com/,0,0,,,none,1,dubaiholding.com,8221,"AS209242 Cloudflare London, LLC",
+legit,https://www.visitdubai.com/,0,0,,,none,1,visitdubai.com,8835,AS20940 Akamai International B.V.,
+legit,https://www.visitabudhabi.ae/,10,10,,,none,1,visitabudhabi.ae,,"AS13335 Cloudflare, Inc.","Domain age unavailable, and the HTTPS certificate was issued 8 days ago"
+legit,https://www.yasisland.com/,0,0,,,none,1,yasisland.com,7306,AS20940 Akamai International B.V.,
+legit,https://www.louvreabudhabi.ae/,0,0,,,none,1,louvreabudhabi.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://www.uaeu.ac.ae/,0,0,,,none,1,uaeu.ac.ae,,AS51182 The United Arab Emirates University,
+legit,https://www.ku.ac.ae/,0,0,,,none,1,ku.ac.ae,,AS61137 Khalifa University,
+legit,https://www.nyu.edu/,0,0,,,none,1,nyu.edu,,"AS16509 Amazon.com, Inc.",
+legit,https://www.dubizzle.com/,0,0,,,none,1,dubizzle.com,7804,AS19551 Incapsula Inc,
+legit,https://www.cars24.ae/,0,0,,,none,1,cars24.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://www.yallamotor.com/,0,0,,,none,1,yallamotor.com,5272,"AS13335 Cloudflare, Inc.",
+legit,https://www.vfsglobal.com/,0,0,,,none,1,vfsglobal.com,7944,"AS16509 Amazon.com, Inc.",
+legit,https://www.bupa.com/,0,0,,,none,1,bupa.com,11695,"AS13335 Cloudflare, Inc.",
+legit,https://www.daman.ae/,0,0,,,none,1,daman.ae,,"AS13335 Cloudflare, Inc.",
+legit,https://www.axa.ae/,0,0,,,none,0,axa.ae,,"AS16509 Amazon.com, Inc.",
+legit,https://www.policybazaar.ae/,0,0,,,none,1,policybazaar.ae,,AS20940 Akamai International B.V.,
+legit,https://www.etoro.com/,0,0,,,none,1,etoro.com,8033,"AS13335 Cloudflare, Inc.",
+legit,https://www.binance.com/,0,0,,,none,1,binance.com,3524,"AS16509 Amazon.com, Inc.",
+legit,https://www.coinbase.com/,0,0,,,none,1,coinbase.com,5624,"AS13335 Cloudflare, Inc.",
+legit,https://www.instagram.com/accounts/login/,0,0,,,none,1,instagram.com,8208,"AS32934 Facebook, Inc.",
+legit,https://www.facebook.com/login/,0,0,,,none,1,m.facebook.com,10833,"AS32934 Facebook, Inc.",
+legit,https://web.whatsapp.com/,0,0,,,none,1,web.whatsapp.com,6655,"AS32934 Facebook, Inc.",Direct WhatsApp link — moves the victim off the platform
+legit,https://www.tiktok.com/login,0,0,,,none,1,tiktok.com,11084,AS20940 Akamai International B.V.,
+legit,https://www.snapchat.com/,0,0,,,none,1,snapchat.com,5383,AS396982 Google LLC,
+legit,https://www.dhl.com/ae-en/home.html,0,0,,,green,1,dhl.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.fedex.com/en-ae/home.html,0,0,,,green,1,fedex.com,,AS20940 Akamai International B.V.,
+legit,https://www.ups.com/ae/en/Home.page,0,0,,,green,1,ups.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.emirates.com/ae/english/,0,0,,,green,1,emirates.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.etihad.com/en-ae/,0,0,,,green,1,etihad.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.flydubai.com/en/,0,0,,,green,1,flydubai.com,,"AS16625 Akamai Technologies, Inc.",
+legit,https://www.airarabia.com/en,0,0,,,green,1,airarabia.com,,AS8075 Microsoft Corporation,
+legit,http://adcb.com,0,0,,,green,1,adcb.com,,"AS13335 Cloudflare, Inc.",
+legit,http://emiratesnbd.com,0,0,,,green,1,emiratesnbd.com,,"AS13335 Cloudflare, Inc.",
+legit,http://tamm.abudhabi,0,0,,,green,0,tamm.abudhabi,,AS201678 Abu Dhabi Digital Authority,
+legit,https://g2crowd.com/,0,0,,,none,1,g2.com,11571,"AS13335 Cloudflare, Inc.",The link sends you to another site: g2.com
+legit,https://talend.com/,0,0,,,none,1,qlik.com,10480,"AS16509 Amazon.com, Inc.",The link sends you to another site: qlik.com
+legit,https://bms.com/,0,0,,,none,1,bms.com,13018,AS19551 Incapsula Inc,
+legit,https://kas-labs.com/,0,0,,,none,0,kas-labs.com,3471,,
+legit,https://ixigo.com/,0,0,,,none,1,ixigo.com,7373,"AS13335 Cloudflare, Inc.",
+legit,https://yenicaggazetesi.com/,0,0,,,none,1,yenicaggazetesi.com,3287,"AS13335 Cloudflare, Inc.",
+legit,https://rednote.com/,0,0,,,none,1,rednote.com,9686,AS139341 ACE,
+legit,https://sendsay.ru/,0,0,,,none,1,sendsay.ru,,AS210756 EdgeCenter LLC,
+legit,https://srv224.com/,0,0,,,none,1,srv224.com,1833,AS47328 DigitalOne AG,
+legit,https://lcw.com/,0,0,,,none,1,lcw.com,11127,AS20940 Akamai International B.V.,
+legit,https://impactcdn.com/,0,0,,,none,0,impactcdn.com,2093,,
+legit,https://news-img.site/,0,0,,,none,0,news-img.site,2165,,The .site ending is common on scam sites
+legit,https://disa.mil/,0,0,,,none,0,disa.mil,,AS5307 United States Department of Defense (DoD),
+legit,https://findmykids.org/,0,0,,,none,1,findmykids.org,4192,AS24940 Hetzner Online GmbH,
+legit,https://bmw.com/,10,10,,,none,1,bmwusa.com,11518,AS20940 Akamai International B.V.,The link sends you to another site: bmwusa.com | Long redirect chain (4)
+legit,https://havadurumu15gunluk.xyz/,0,0,,,none,1,havadurumu15gunluk.xyz,4309,AS42807 CIZGI TELEKOMUNIKASYON ANONIM SIRKETI,The .xyz ending is common on scam sites
+legit,https://faire.com/,0,0,,,none,1,faire.com,10444,"AS13335 Cloudflare, Inc.",
+legit,https://servetraff.com/,0,0,,,none,1,servetraff.com,1825,AS40824 Webzilla Inc.,
+legit,https://creativebloq.com/,0,0,,,none,1,creativebloq.com,5509,"AS54113 Fastly, Inc.",
+legit,https://e2ma.net/,0,0,,,none,0,e2ma.net,9020,,
+legit,https://deutschlandfunk.de/,0,0,,,none,1,deutschlandfunk.de,,"AS16625 Akamai Technologies, Inc.",
+legit,https://lucidmotors.com/,0,0,,,none,1,lucidmotors.com,3786,"AS16509 Amazon.com, Inc.",
+legit,https://snapdeal.com/,0,0,,,none,1,snapdeal.com,8826,"AS16509 Amazon.com, Inc.",
+legit,https://gta5-mods.com/,0,0,,,none,1,gta5-mods.com,5509,"AS13335 Cloudflare, Inc.",
+legit,https://manitu.net/,0,0,,,none,0,manitu.net,10620,AS34240 manitu GmbH,
+legit,https://awsglobalaccelerator.com/,0,0,,,none,0,awsglobalaccelerator.com,2920,,
+legit,https://vectant.ne.jp/,0,0,,,none,0,vectant.ne.jp,,,
+legit,https://greenend.org.uk/,0,0,,,none,0,greenend.org.uk,11431,,
+legit,https://xn--18-3qi3cza3b2a2dxc4b9a.com/,55,55,,,amber,1,xn--18-3qi3cza3b2a2dxc4b9a.com,514,"AS13335 Cloudflare, Inc.","Disguised domain characters (Punycode), used to imitate real sites | Long name with several hyphens — common in imitation sites | The site name is random letters and numbers"
+legit,https://hetvomaug.com/,0,0,,,none,0,hetvomaug.com,208,,
+legit,https://motherjones.com/,0,0,,,none,0,motherjones.com,11482,,
+legit,https://luugy.com/,0,0,,,none,1,luugy.com,1680,AS9002 RETN Limited,
+legit,https://dowjones.com/,0,0,,,none,1,dowjones.com,12738,"AS16509 Amazon.com, Inc.",
+legit,https://dish.com/,0,0,,,none,1,dish.com,11433,AS35280 F5 Networks SARL,
+legit,https://komoot.com/,0,0,,,none,1,komoot.com,6599,"AS16509 Amazon.com, Inc.",
+legit,https://komoot.net/,0,0,,,none,0,komoot.net,6457,,
+legit,https://mofa.gov.sa/,0,0,,,none,0,mofa.gov.sa,,AS210275 Saudi Information Technology Company CJSC,
+legit,https://foundationdns.com/,0,0,,,none,1,cloudflare.com,6489,"AS13335 Cloudflare, Inc.",The link sends you to another site: cloudflare.com
+legit,https://newswise.com/,0,0,,,none,0,newswise.com,11136,"AS13335 Cloudflare, Inc.",
+legit,https://agilent.com/,0,0,,,none,1,agilent.com,11375,"AS16625 Akamai Technologies, Inc.",
+legit,https://timeslive.co.za/,10,10,,,none,1,timeslive.co.za,,AS20940 Akamai International B.V.,"Domain age unavailable, and the HTTPS certificate was issued 6 days ago"
+legit,https://gettyimages.in/,0,0,,,none,1,gettyimages.in,7916,"AS13335 Cloudflare, Inc.",
+legit,https://intsmarthub.com/,0,0,,,none,0,intsmarthub.com,2274,,
+legit,https://alexispragmatic.com/,20,20,,,none,0,alexispragmatic.com,54,,New domain: 54 days old
+legit,https://nooncdn.com/,0,0,,,none,0,nooncdn.com,3413,,
+legit,https://rutor.info/,0,0,,,none,1,rutor.info,3984,AS47890 UNMANAGED LTD,The .info ending is common on scam sites
+legit,https://baden-wuerttemberg.de/,0,0,,,none,1,baden-wuerttemberg.de,,AS8495 INTERNET AG Global Network,
+legit,https://value-domain.com/,0,0,,,none,1,value-domain.com,8881,"AS13335 Cloudflare, Inc.",
+legit,https://9xflix.spa/,60,60,,,red,1,9xflix.review,20,"AS13335 Cloudflare, Inc.",The link sends you to another site: 9xflix.review | Long redirect chain (3) | The domain is only 20 days old
+legit,https://esuteru.com/,0,0,,,none,0,esuteru.com,6086,AS38631 LY Corporation,
+legit,https://plusoneads.com/,20,20,,,none,1,plusoneads.com,90,"AS13335 Cloudflare, Inc.",New domain: 90 days old
+legit,https://cdnstream1.com/,0,0,,,none,0,cdnstream1.com,4192,,
+legit,https://teachtci.com/,0,0,,,none,1,teachtci.com,11423,"AS16509 Amazon.com, Inc.",
+legit,https://skyhook.com/,0,0,,,none,0,skyhook.com,8663,,
+legit,https://talent.com/,0,0,,,none,1,talent.com,10750,"AS16509 Amazon.com, Inc.",
+legit,https://tsinghua.edu.cn/,0,0,,,none,0,tsinghua.edu.cn,,,
+legit,https://digitallocker.gov.in/,0,0,,,none,1,digilocker.gov.in,545,"AS16509 Amazon.com, Inc.",
+legit,https://motorsport.com/,0,0,,,none,1,motorsport.com,11775,"AS16509 Amazon.com, Inc.",
+legit,https://mass.gov/,0,0,,,none,1,mass.gov,9492,AS20940 Akamai International B.V.,
+legit,https://iperceptions.com/,0,0,,,none,0,iperceptions.com,10508,"AS14618 Amazon.com, Inc.",
+legit,https://cienradios.com/,0,0,,,none,1,cienradios.com,6549,"AS16509 Amazon.com, Inc.",
+legit,https://cdiscount.com/,0,0,,,none,1,cdiscount.com,10266,"AS13335 Cloudflare, Inc.",
+legit,https://airtrfx.com/,0,0,,,none,0,airtrfx.com,4969,,
+legit,https://twimg.com/,0,0,,,none,0,twimg.com,6637,,
+legit,https://technorail.com/,0,0,,,none,0,technorail.com,10765,AS31034 Aruba S.p.A.,
+legit,https://syosetu.com/,0,0,,,none,1,syosetu.com,7494,AS4694 IDC Frontier Inc.,
+legit,https://braiiz.com/,0,0,,,none,1,braiiz.com,506,"AS13335 Cloudflare, Inc.",
+legit,https://syosetu.org/,0,0,,,none,1,syosetu.org,5247,"AS13335 Cloudflare, Inc.",
+legit,https://rings.solutions/,0,0,,,none,0,rings.solutions,3483,,
+legit,https://snap.com/,0,0,,,none,1,snap.com,10870,AS396982 Google LLC,
+legit,https://ironman.com/,0,0,,,none,1,ironman.com,9602,"AS13335 Cloudflare, Inc.",
+legit,https://giex.ru/,0,0,,,none,0,giex.ru,,,
+legit,https://shimano.com/,0,0,,,none,1,shimano.com,11377,"AS16625 Akamai Technologies, Inc.",
+legit,https://rdupestcontrol.com/,0,0,,,none,1,rdupestcontrol.com,264,"AS13335 Cloudflare, Inc.",
+legit,https://life-n.jp/,10,10,,,none,1,life-n.jp,,AS9370 SAKURA Internet Inc.,Long redirect chain (3)
+legit,https://reamaze.com/,0,0,,,none,1,reamaze.com,5455,"AS16509 Amazon.com, Inc.",
+legit,https://queniuaa.com/,0,0,,,none,0,queniuaa.com,2056,,
+legit,https://ingresso.com/,0,0,,,none,1,ingresso.com,9554,"AS16625 Akamai Technologies, Inc.",
+legit,https://indiatoday.in/,0,0,,,none,1,indiatoday.in,7993,AS20940 Akamai International B.V.,
+legit,https://giga.de/,25,25,,,none,1,giga.de,,"AS16509 Amazon.com, Inc.",The page uses the name Apple but is not its official site
+legit,https://canva.link/,0,0,,,none,1,canva.com,9335,"AS13335 Cloudflare, Inc.",The link sends you to another site: canva.com
+legit,https://mobshark.net/,0,0,,,none,1,mobshark.net,2700,"AS45102 Alibaba (US) Technology Co., Ltd.",
+legit,https://hapseemate.cn/,0,0,,,none,1,hapseemate.cn,,AS55990 Huawei Cloud Service data center,
+legit,https://canva.site/,0,0,,,none,1,canva.site,3158,"AS209242 Cloudflare London, LLC",The .site ending is common on scam sites
+legit,https://snapp.ir/,10,10,,,none,1,snapp.ir,,AS205585 Noyan Abr Arvan Co. ( Private Joint Stock),Long redirect chain (8)
+legit,https://bestbuy.ca/,0,0,,,none,1,bestbuy.ca,9534,AS20940 Akamai International B.V.,
+legit,https://35.in-addr.arpa/,0,0,,,none,0,35.in-addr.arpa,,,
+legit,https://bngf.ru/,0,0,,,none,0,bngf.ru,,"AS28812 PJSC ""Bashinformsvyaz""",
+legit,https://trabajo.org/,0,0,,,none,1,trabajo.org,10588,"AS16509 Amazon.com, Inc.",
+legit,https://klarna.com/,0,0,,,none,1,klarna.com,6556,"AS16509 Amazon.com, Inc.",
+legit,https://klarna.net/,0,0,,,none,0,klarna.net,6411,,
+legit,https://moviezda.me/,50,50,,,amber,1,moviesda36.com,3,"AS13335 Cloudflare, Inc.",The link sends you to another site: moviesda36.com | The domain is only 3 days old
+legit,https://lasprovincias.es/,0,0,,,none,1,lasprovincias.es,,"AS54113 Fastly, Inc.",
+legit,https://einnews.com/,0,0,,,none,1,einnews.com,8992,"AS13335 Cloudflare, Inc.",
+legit,https://exxonmobil.com/,0,0,,,none,1,corporate.exxonmobil.com,10227,"AS16625 Akamai Technologies, Inc.",
+legit,https://sift.com/,0,0,,,none,1,sift.com,11421,"AS209242 Cloudflare London, LLC",
+legit,https://bstatic.com/,0,0,,,none,1,bstatic.com,6423,"AS16509 Amazon.com, Inc.",
+legit,https://physiology.org/,0,0,,,none,1,physiology.org,10748,"AS14618 Amazon.com, Inc.",Long redirect chain (6)
+legit,https://bnl.gov/,0,0,,,none,1,bnl.gov,10646,"AS14618 Amazon.com, Inc.",
+legit,https://popcornnews.ru/,0,0,,,none,1,popcornnews.ru,,AS57724 DDOS-GUARD LTD,
